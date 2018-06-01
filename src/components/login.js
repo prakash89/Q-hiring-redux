@@ -8,13 +8,14 @@ class Login extends Component {
     super(props);
   }
 
-  loginSubmit(fields){
-    console.log('loooooo', fields)
+  loginSubmit(user_params){
+
+    console.log('loooooo', user_params)
     let params = {
-      email: 'email@email.com',
-      password: '123123'
+      email: user_params.username,
+      password: user_params.password
     }
-    this.props.login()
+    this.props.login(params)
     console.log('i am here');
   }
 
@@ -26,18 +27,21 @@ class Login extends Component {
 
   render(){
     return(
-      <LoginForm onSubmit={() => this.loginSubmit()} />
+      <LoginForm
+        title='Login'
+        rememberMe={false}
+        onSubmit={(user_params) => this.loginSubmit(user_params)}/>
       )
   }
 }
 
 const mapStateToProps = ({loginData}) => {
-    return ({
-    message: loginData.message,
-    idToken: loginData.id_token
-    })
-    // let {message,id_token} = loginData
-    // return {message,id_token}
+  return ({
+  message: loginData.message,
+  idToken: loginData.id_token
+  })
+  // let {message,id_token} = loginData
+  // return {message,id_token}
 }
 
 // const mapDispatchToProps(dispatch) => {

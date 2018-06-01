@@ -1,8 +1,9 @@
 //import styles
-import 'grommet/scss/vanilla/index';
+import 'grommet/scss/hpe/index';
 
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import App from 'grommet/components/App';
 import Box from 'grommet/components/Box';
 import Header from 'grommet/components/Header';
@@ -11,6 +12,7 @@ import Meter from 'grommet/components/Meter';
 import Title from 'grommet/components/Title';
 import Value from 'grommet/components/Value';
 import Login from './components/login';
+import Signup from './components/signup';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
@@ -28,7 +30,11 @@ class Main extends Component {
             <Title>Q-Hiring</Title>
           </Header>
           <Box pad='medium'>
-            <Login />
+            <BrowserRouter>
+              <Switch>
+                <Route path="/" component={Signup} />
+              </Switch>
+            </BrowserRouter>
           </Box>
         </App>
       </Provider>
