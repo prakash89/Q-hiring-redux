@@ -8,6 +8,7 @@ import Button from 'grommet/components/Button';
 import Footer from 'grommet/components/Footer';
 import {connect} from 'react-redux';
 import {signup} from '../redux/actions';
+import '../app.css';
 
 class Signup extends Component {
   constructor(props) {
@@ -66,7 +67,7 @@ class Signup extends Component {
     return(
       <Form onSubmit={(e) => this.signupSubmit(e)}>
         <Header>
-          <Heading>
+          <Heading className="text-align-center">
             SignUp
           </Heading>
         </Header>

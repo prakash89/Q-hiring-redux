@@ -3,7 +3,7 @@ import 'grommet/scss/hpe/index';
 
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch,Link } from 'react-router-dom';
 import App from 'grommet/components/App';
 import Box from 'grommet/components/Box';
 import Header from 'grommet/components/Header';
@@ -13,6 +13,7 @@ import Title from 'grommet/components/Title';
 import Value from 'grommet/components/Value';
 import Login from './components/login';
 import Signup from './components/signup';
+import './app.css';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
@@ -24,19 +25,20 @@ class Main extends Component {
   render() {
     return (
       <Provider store={store}>
-        <App centered={false}>
-          <Header direction="row" justify="between" size="large"
-            pad={{ horizontal: 'medium' }}>
-            <Title>Q-Hiring</Title>
-          </Header>
-          <Box pad='medium'>
-            <BrowserRouter>
-              <Switch>
-                <Route path="/" component={Signup} />
-              </Switch>
-            </BrowserRouter>
-          </Box>
-        </App>
+        <BrowserRouter>
+          <App centered={false}>
+            <Header direction="row" justify="between" size="large"
+              pad={{ horizontal: 'medium' }}>
+              <Title>Q-Hiring</Title>
+              <Link to="/login" className="padding-left-fix">LogIn</Link>
+              <Link to="/" className="padding-right-fix">SignUp</Link>
+            </Header>
+            <Box pad='medium'>
+              <Route exact path="/" component={Signup} />
+              <Route path="/login" component={Login} />
+            </Box>
+          </App>
+        </BrowserRouter>
       </Provider>
     );
   }

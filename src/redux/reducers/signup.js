@@ -10,9 +10,9 @@ export default (state = INITIAL_STATE, action) => {
   console.log("action", action.payload)
   switch (action.type) {
     case SIGNUP:
-      let {message} = action.payload.message;
-      let {authToken} = action.payload.session.authToken;
-      let {email} = action.payload.user.email;
+      let {message} = action.payload;
+      let {authToken} = action.payload.session;
+      let {email} = action.payload.user;
       return {...state, message, authToken, email};
     default:
       return state;
