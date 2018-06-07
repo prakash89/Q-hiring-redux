@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import LoginForm from 'grommet/components/LoginForm';
 import {connect} from 'react-redux';
 import {login} from '../redux/actions';
+import { Redirect, HashRouter } from 'react-router-dom';
+
 
 class Login extends Component {
   constructor(props) {
@@ -20,8 +22,9 @@ class Login extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.success) {
-      console.log('logged in');
+    if(nextProps.message == "You have successfully signed up.") {
+      console.log("done here", nextProps.message)
+      this.props.history.push('/instaction')
     }
   }
 
@@ -37,6 +40,7 @@ class Login extends Component {
 
 const mapStateToProps = ({loginData}) => {
   console.log('loginData', loginData)
+  localStorage.setItem('idToken', loginData.id_token);
   return ({
   message: loginData.message,
   idToken: loginData.id_token

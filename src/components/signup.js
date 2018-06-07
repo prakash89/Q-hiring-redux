@@ -64,8 +64,8 @@ class Signup extends Component {
       phone: this.state.phone,
       city: this.state.city,
     }
-    console.log('form valid', this.state.formIsValid)
-    if(this.state.formIsValid == true) {
+    console.log('form valid', this.state.formValid)
+    if(this.state.formValid == true) {
       this.props.signup(params)
     }
 
@@ -153,7 +153,7 @@ class Signup extends Component {
   render() {
     return(
       <div>
-      { ((this.state.formIsValid == false) && this.state.isSubmit) ? (<Toast status='critical'>
+      { ((this.state.formValid == false) && this.state.isSubmit) ? (<Toast status='critical'>
         Invalid Forms.
       </Toast>) : null }
       <Form onSubmit={(e) => this.signupSubmit(e)}>
