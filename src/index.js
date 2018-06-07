@@ -3,7 +3,7 @@ import 'grommet/scss/hpe/index';
 
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Switch,Link } from 'react-router-dom';
+import { BrowserRouter, Route, Switch,Link, Redirect } from 'react-router-dom';
 import App from 'grommet/components/App';
 import Box from 'grommet/components/Box';
 import Header from 'grommet/components/Header';
@@ -13,6 +13,7 @@ import Title from 'grommet/components/Title';
 import Value from 'grommet/components/Value';
 import Login from './components/login';
 import Signup from './components/signup';
+import Instaction from './components/instaction';
 import './app.css';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
@@ -32,10 +33,12 @@ class Main extends Component {
               <Title>Q-Hiring</Title>
               <Link to="/login" className="padding-left-fix">LogIn</Link>
               <Link to="/" className="padding-right-fix">SignUp</Link>
+              <Link to="/instaction" className="padding-right-fix">Instaction</Link>
             </Header>
             <Box pad='medium'>
               <Route exact path="/" component={Signup} />
               <Route path="/login" component={Login} />
+              <Route path="/instaction" component={Instaction} />
             </Box>
           </App>
         </BrowserRouter>

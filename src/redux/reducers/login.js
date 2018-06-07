@@ -8,7 +8,9 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case LOGIN:
-      let {message, id_token} = action.payload
+      // let {message, id_token} = action.payload
+      let message = action.payload.message
+      let id_token = action.payload.session.authToken
       return {...state, message, id_token};
     default:
       return state;
