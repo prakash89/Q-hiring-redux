@@ -39,11 +39,12 @@ class Login extends Component {
 }
 
 const mapStateToProps = ({loginData}) => {
-  console.log('loginData', loginData)
   localStorage.setItem('idToken', loginData.id_token);
+  localStorage.setItem('userEmail', loginData.email);
   return ({
   message: loginData.message,
-  idToken: loginData.id_token
+  idToken: loginData.id_token,
+  email: loginData.email
   })
   // let {message,id_token} = loginData
   // return {message,id_token}

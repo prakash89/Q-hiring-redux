@@ -14,6 +14,7 @@ import Value from 'grommet/components/Value';
 import Login from './components/login';
 import Signup from './components/signup';
 import Instaction from './components/instaction';
+import Feedback from './components/feedback';
 import './app.css';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
@@ -34,11 +35,13 @@ class Main extends Component {
               <Link to="/login" className="padding-left-fix">LogIn</Link>
               <Link to="/" className="padding-right-fix">SignUp</Link>
               <Link to="/instaction" className="padding-right-fix">Instaction</Link>
+              <Link to="/feedback" className="padding-right-fix">Feedback</Link>
             </Header>
             <Box pad='medium'>
               <Route exact path="/" component={Signup} />
               <Route path="/login" component={Login} />
               <Route path="/instaction" component={Instaction} />
+              <Route path="/feedback" component={Feedback} />
             </Box>
           </App>
         </BrowserRouter>
