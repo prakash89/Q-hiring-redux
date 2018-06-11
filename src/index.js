@@ -33,9 +33,9 @@ class Main extends Component {
               pad={{ horizontal: 'medium' }}>
               <Title>Q-Hiring</Title>
               <Link to="/login" className="padding-left-fix">LogIn</Link>
-              <Link to="/" className="padding-right-fix">SignUp</Link>
-              <Link to="/instaction" className="padding-right-fix">Instaction</Link>
-              <Link to="/feedback" className="padding-right-fix">Feedback</Link>
+              <Link to="/">SignUp</Link>
+              <Link to="/instaction">Instruction</Link>
+              <Link to="/feedback">Feedback</Link>
             </Header>
             <Box pad='medium'>
               <Route exact path="/" component={Signup} />
