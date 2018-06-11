@@ -9,7 +9,6 @@ export const login = (params) => {
     })
     .then(response => response.json())
     .then(json => {
-      console.log('login json - ', json)
       dispatch({
         type: LOGIN,
         payload: json
