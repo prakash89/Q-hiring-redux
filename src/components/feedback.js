@@ -6,7 +6,6 @@ import FormField from 'grommet/components/FormField';
 import Button from 'grommet/components/Button';
 import Footer from 'grommet/components/Footer';
 import ReactStars from 'react-stars'
-import '../css/instaction.css';
 
 class Feedback extends Component {
 	constructor(props) {
