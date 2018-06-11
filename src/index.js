@@ -13,7 +13,7 @@ import Title from 'grommet/components/Title';
 import Value from 'grommet/components/Value';
 import Login from './components/login';
 import Signup from './components/signup';
-import Instaction from './components/instaction';
+import Instruction from './components/instruction';
 import Feedback from './components/feedback';
 import './app.css';
 import { Provider } from 'react-redux';
@@ -34,13 +34,13 @@ class Main extends Component {
               <Title>Q-Hiring</Title>
               <Link to="/login" className="padding-left-fix">LogIn</Link>
               <Link to="/">SignUp</Link>
-              <Link to="/instaction">Instruction</Link>
+              <Link to="/instruction">Instruction</Link>
               <Link to="/feedback">Feedback</Link>
             </Header>
             <Box pad='medium'>
               <Route exact path="/" component={Signup} />
               <Route path="/login" component={Login} />
-              <Route path="/instaction" component={Instaction} />
+              <Route path="/instruction" component={Instruction} />
               <Route path="/feedback" component={Feedback} />
             </Box>
           </App>

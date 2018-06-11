@@ -9,7 +9,6 @@ export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case FEEDBACK:
       let {message} = action.payload;
-      debugger
       return {...state, message};
     default:
       return state;

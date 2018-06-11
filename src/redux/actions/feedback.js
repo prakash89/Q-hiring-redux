@@ -1,8 +1,9 @@
 import { FEEDBACK } from '../actionTypes'
+import {ENDPOINT} from '../../app'
 
 export const feedback = (params) => {
 	return (dispatch) => {
-		const URL = 'http://localhost:3001/feedback'
+		const URL = ENDPOINT + 'feedback'
 		fetch(URL, {
 			method: 'POST',
 			body: JSON.stringify(params),
