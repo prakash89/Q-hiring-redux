@@ -3,9 +3,10 @@ import 'grommet/scss/hpe/index';
 
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Switch,Link, Redirect } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Link, Redirect } from 'react-router-dom';
 import App from 'grommet/components/App';
 import Box from 'grommet/components/Box';
+import Select from 'grommet/components/Select';
 import Header from 'grommet/components/Header';
 // import Footer from 'grommet/components/Footer';
 import Meter from 'grommet/components/Meter';
@@ -14,6 +15,7 @@ import Value from 'grommet/components/Value';
 import Login from './components/login';
 import Signup from './components/signup';
 import Instaction from './components/instaction';
+import QuestionsList from './components/questionsList';
 import './app.css';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
@@ -23,22 +25,36 @@ import reducers from './redux/reducers';
 const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
 
 class Main extends Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+      loginRedirectRef: false,
+      signRedirectRef: false
+    }
+  }
+
   render() {
-    return (
+    return(
       <Provider store={store}>
         <BrowserRouter>
           <App centered={false}>
             <Header direction="row" justify="between" size="large"
               pad={{ horizontal: 'medium' }}>
               <Title>Q-Hiring</Title>
-              <Link to="/login" className="padding-left-fix">LogIn</Link>
-              <Link to="/" className="padding-right-fix">SignUp</Link>
-              <Link to="/instaction" className="padding-right-fix">Instaction</Link>
+              <Link to="/QuestionsList" className="padding-left-fix">List all the questions</Link>
+              <Select placeHolder='None'
+                inline={false}
+                options={["Login", "Signup"]}
+                value={"signup"}
+                onChange={(e) => this.setState({ loginRedirectRef: true })}
+                 />
             </Header>
             <Box pad='medium'>
               <Route exact path="/" component={Signup} />
               <Route path="/login" component={Login} />
-              <Route path="/instaction" component={Instaction} />
+              <Route path="/instruction" component={Instaction} />
+              <Route path="/QuestionsList" component={QuestionsList} />
             </Box>
           </App>
         </BrowserRouter>
