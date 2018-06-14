@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 import Table from 'grommet/components/Table';
 import TableRow from 'grommet/components/TableRow';
 import { questionsList } from "../redux/actions";
+import Article from 'grommet/components/Article';
+import Button from 'grommet/components/Button';
+import Layer from 'grommet/components/Layer';
 
 import '../css/questionsList.css';
 
@@ -23,38 +26,45 @@ class QuestionsList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      questions: []
+      showAddQuestionLayer: false
     }
   }
 
   componentDidMount(){
-    console.log("inside the component did mount")
-  }
-  componentWillMount() {
-    console.log("inside the componentWillMount")
     this.props.questionsList();
+  }
 
+  showAddQuestionModal(){
+    console.log("inside add question modal function")
+    this.setState({showAddQuestionLayer: true})
+    console.log("")
+    console.log(`state : ${this.state}`)
+    console.log("")
   }
 
   renderQuestionRows(){
-    return questionsListData.map((question, index) =>
-      <TableRow key={question.id}>
-        <td>
-          {index+1}
-        </td>
-        <td>
-          {question.title}
-        </td>
-        {this.renderTableoptions(question.option_1, question.answer)}
-        {this.renderTableoptions(question.option_2, question.answer)}
-        {this.renderTableoptions(question.option_3, question.answer)}
-        {this.renderTableoptions(question.option_4, question.answer)}
-      </TableRow>
-    )
+    if (this.props.questions.length > 0) {
+      return this.props.questions.map((question, index) =>
+        <TableRow key={question.id}>
+          <td>
+            {index + 1}
+          </td>
+          <td>
+            {question.title}
+          </td>
+          {this.renderTableoptions(question.option_1, question.answer)}
+          {this.renderTableoptions(question.option_2, question.answer)}
+          {this.renderTableoptions(question.option_3, question.answer)}
+          {this.renderTableoptions(question.option_4, question.answer)}
+        </TableRow>
+      )
+    }else{
+      return <h1>Loading...</h1>
+    }
+
   }
 
   renderTableoptions(option, answer){
-    console.log(`option: ${option}, answer: ${answer}`)
     if (option == answer) {
       return <td className='secondary answer'>
         {option}
@@ -68,7 +78,14 @@ class QuestionsList extends Component {
 
   render() {
     return (
-      <Table scrollable={false}>
+      <Article>
+        <Button
+          primary={true}
+          plain={true}
+          label='Add Question'
+          href='#'
+          onClick={() => this.showAddQuestionModal()}/>
+      <Table>
         <thead>
           <tr>
             <th>
@@ -95,18 +112,20 @@ class QuestionsList extends Component {
             {this.renderQuestionRows()}
         </tbody>
       </Table>
+      { this.state.showAddQuestionLayer &&
+        <Layer closer={true}>
+          <div>hai</div>
+        </Layer> }
+      </Article>
     )
   }
 
 }
 
 
-const mapStateToProps = ({ signupData }) => {
-  console.log("signupData", signupData)
+const mapStateToProps = (state) => {
   return ({
-    message: signupData.message,
-    email: signupData.email,
-    authToken: signupData.authToken,
+    questions: state.questionsList.questions
   })
 }
 
