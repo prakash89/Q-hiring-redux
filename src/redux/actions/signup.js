@@ -3,7 +3,7 @@ import {SIGNUP} from '../actionTypes'
 export const signup = (params) => {
   return(dispatch) => {
     const URL = 'http://localhost:3001/register'
-    fetch(URL, {
+    return fetch(URL, {
       method: 'POST',
       body: JSON.stringify(params)
     })

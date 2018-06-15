@@ -3,7 +3,7 @@ import {LOGIN} from '../actionTypes'
 export const login = (params) => {
   return (dispatch) => {
     const URL = 'http://localhost:3001/login'
-    fetch(URL, {
+    return fetch(URL, {
       method: 'POST',
       body: JSON.stringify(params),
     })
