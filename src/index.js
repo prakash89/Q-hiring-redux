@@ -6,7 +6,6 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch, Link, Redirect } from 'react-router-dom';
 import App from 'grommet/components/App';
 import Box from 'grommet/components/Box';
-import Select from 'grommet/components/Select';
 import Header from 'grommet/components/Header';
 // import Footer from 'grommet/components/Footer';
 import Meter from 'grommet/components/Meter';
@@ -43,17 +42,17 @@ class Main extends Component {
               pad={{ horizontal: 'medium' }}>
               <Title>Q-Hiring</Title>
               <Link to="/login" className="padding-left-fix">LogIn</Link>
-              <Link to="/">SignUp</Link>
-              <Link to="/instruction">Instruction</Link>
-              {/* <Link to="/feedback">Feedback</Link> */}
+              <Link to="/" className="padding-right-fix">SignUp</Link>
+              <Link to="/instaction" className="padding-right-fix">Instaction</Link>
+              <Link to="/feedback">Feedback</Link>
               <Link to="/QuestionsList">List all the questions</Link>
             </Header>
             <Box pad='medium'>
               <Route exact path="/" component={Signup} />
               <Route path="/login" component={Login} />
-              <Route path="/instruction" component={Instaction} />
+              <Route path="/instaction" component={Instaction} />
+               <Route path="/feedback" component={Feedback} />
               <Route path="/QuestionsList" component={QuestionsList} />
-              {/* <Route path="/feedback" component={Feedback} /> */}
             </Box>
           </App>
         </BrowserRouter>
