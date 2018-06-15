@@ -6,11 +6,13 @@ const INITIAL_STATE = {
 }
 
 export default (state = INITIAL_STATE, action) => {
-  console.log("action", action.payload)
+  console.log("action", action.questions)
   switch (action.type) {
     case QUESTIONS:
-      let {message} = action.payload;
-      return {...state, message};
+      return {
+        ...state,
+        items: action.questions,
+      };
     default:
       return state;
   }

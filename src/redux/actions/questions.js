@@ -1,12 +1,11 @@
 import { QUESTIONS } from '../actionTypes'
-import {ENDPOINT} from '../../app'
+import API_END_POINT from '../../app'
 
-export const feedback = (params) => {
+export const fetchQuestions = () => {
 	return (dispatch) => {
-		const URL = ENDPOINT + 'questions'
+		const URL = `${API_END_POINT}questions`;
 		fetch(URL, {
-			method: 'POST',
-			body: JSON.stringify(params),
+			method: 'GET',
 			headers: {
 				"Content-Type": "application/json",
 				"Authorization": localStorage.getItem('idToken'),
@@ -15,14 +14,14 @@ export const feedback = (params) => {
 		})
 			.then(response => response.json())
 			.then(json => {
-				console.log('login json - ', json)
+				console.log('fetchQuestions success - ', json)
 				dispatch({
 					type: QUESTIONS,
-					payload: json
+					questions: json.exam,
 				})
 			})
 			.catch(error => {
-				console.log('login error - ', error)
+				console.log('fetchQuestions  error - ', error)
 			})
 	}
 }

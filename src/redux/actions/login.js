@@ -5,7 +5,7 @@ import API_END_POINT from '../../app'
 export const login = (params) => {
   return (dispatch) => {
     const URL = `${API_END_POINT}login`;
-    console.log(URL);
+    console.log(params);
     fetch(URL, {
       method: 'POST',
       body: JSON.stringify(params),
