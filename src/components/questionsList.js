@@ -9,18 +9,6 @@ import { Layer, Box, Split } from 'grommet';
 
 import '../css/questionsList.css';
 
-const questionsListData = [
-  {
-    "id": 1,
-    "title": "sample question 1",
-    "option_1": "option1",
-    "option_2": "option2",
-    "option_3": "option3",
-    "option_4": "option4",
-    "answer": "option1"
-  }
-]
-
 class QuestionsList extends Component {
 
   constructor(props) {
