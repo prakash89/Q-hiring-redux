@@ -5,15 +5,15 @@ import TableRow from 'grommet/components/TableRow';
 import { questionsList } from "../redux/actions";
 import Article from 'grommet/components/Article';
 import Button from 'grommet/components/Button';
-import Layer from 'grommet/components/Layer';
+import { Layer, Box, Split } from 'grommet';
 
 import '../css/questionsList.css';
 
 const questionsListData = [
   {
-    "id":1,
+    "id": 1,
     "title": "sample question 1",
-    "option_1":"option1",
+    "option_1": "option1",
     "option_2": "option2",
     "option_3": "option3",
     "option_4": "option4",
@@ -30,19 +30,19 @@ class QuestionsList extends Component {
     }
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.props.questionsList();
   }
 
-  showAddQuestionModal(){
+  showAddQuestionModal() {
     console.log("inside add question modal function")
-    this.setState({showAddQuestionLayer: true})
+    this.setState({ showAddQuestionLayer: true })
     console.log("")
     console.log(`state : ${this.state}`)
     console.log("")
   }
 
-  renderQuestionRows(){
+  renderQuestionRows() {
     if (this.props.questions.length > 0) {
       return this.props.questions.map((question, index) =>
         <TableRow key={question.id}>
@@ -58,65 +58,72 @@ class QuestionsList extends Component {
           {this.renderTableoptions(question.option_4, question.answer)}
         </TableRow>
       )
-    }else{
+    } else {
       return <h1>Loading...</h1>
     }
 
   }
 
-  renderTableoptions(option, answer){
+  renderTableoptions(option, answer) {
     if (option == answer) {
       return <td className='secondary answer'>
         {option}
-            </td>
-    }else{
+      </td>
+    } else {
       return <td className='secondary'>
-          {option}
-            </td>
+        {option}
+      </td>
     }
   }
 
   render() {
     return (
-      <Article>
-        <Button
-          primary={true}
-          plain={true}
-          label='Add Question'
-          href='#'
-          onClick={() => this.showAddQuestionModal()}/>
-      <Table>
-        <thead>
-          <tr>
-            <th>
-              Id
-            </th>
-            <th>
-              Question Title
-            </th>
-            <th>
-              Option 1
-            </th>
-            <th>
-              Option 2
-            </th>
-            <th>
-              Option 3
-            </th>
-            <th>
-              Option 4
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-            {this.renderQuestionRows()}
-        </tbody>
-      </Table>
-      { this.state.showAddQuestionLayer &&
-        <Layer closer={true}>
-          <div>hai</div>
-        </Layer> }
-      </Article>
+      <div>
+        <Split fixed={false}>
+          <Box />
+          <Box />
+          <Box>
+            <Button
+              primary={true}
+              plain={true}
+              label='Add Question'
+              onClick={() => this.showAddQuestionModal()} />
+          </Box>
+        </Split>
+        <Article>
+          <Table>
+            <thead>
+              <tr>
+                <th>
+                  Id
+</th>
+                <th>
+                  Question Title
+</th>
+                <th>
+                  Option 1
+</th>
+                <th>
+                  Option 2
+</th>
+                <th>
+                  Option 3
+</th>
+                <th>
+                  Option 4
+</th>
+              </tr>
+            </thead>
+            <tbody>
+              {this.renderQuestionRows()}
+            </tbody>
+          </Table>
+          {this.state.showAddQuestionLayer &&
+            <Layer closer={true}>
+              <div>hai</div>
+            </Layer>}
+        </Article>
+      </div>
     )
   }
 
@@ -131,4 +138,4 @@ const mapStateToProps = (state) => {
 
 
 
-export default connect(mapStateToProps, { questionsList})(QuestionsList);
+export default connect(mapStateToProps, { questionsList })(QuestionsList);

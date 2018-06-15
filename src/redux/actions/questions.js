@@ -7,7 +7,7 @@ export const questionsList = (params) => {
       method: 'GET',
       headers: {
         "Content-Type": "application/json",
-        Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQG1haWxpbmF0b3IuY29tIiwiaWF0IjoxNTI4OTQ0MTUwLCJleHAiOjE1Mjg5NDc3NTB9.3BOPTIBxHmHUzEQTwHBiRXId6i57_rq9nlF0YurFYZY"
+        Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQG1haWxpbmF0b3IuY29tIiwiaWF0IjoxNTI4OTc4Nzg4LCJleHAiOjE1Mjg5ODIzODh9.aS-arbQpuux2uDzaGgmb8vaxNPwUnlpJZ6-1DB-wDMY"
       }
     })
     .then(response => response.json())

@@ -42,19 +42,18 @@ class Main extends Component {
             <Header direction="row" justify="between" size="large"
               pad={{ horizontal: 'medium' }}>
               <Title>Q-Hiring</Title>
-              <Link to="/QuestionsList" className="padding-left-fix">List all the questions</Link>
-              <Select placeHolder='None'
-                inline={false}
-                options={["Login", "Signup"]}
-                value={"signup"}
-                onChange={(e) => this.setState({ loginRedirectRef: true })}
-                 />
+              <Link to="/login" className="padding-left-fix">LogIn</Link>
+              <Link to="/">SignUp</Link>
+              <Link to="/instruction">Instruction</Link>
+              {/* <Link to="/feedback">Feedback</Link> */}
+              <Link to="/QuestionsList">List all the questions</Link>
             </Header>
             <Box pad='medium'>
               <Route exact path="/" component={Signup} />
               <Route path="/login" component={Login} />
               <Route path="/instruction" component={Instaction} />
               <Route path="/QuestionsList" component={QuestionsList} />
+              {/* <Route path="/feedback" component={Feedback} /> */}
             </Box>
           </App>
         </BrowserRouter>
