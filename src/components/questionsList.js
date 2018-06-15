@@ -35,11 +35,7 @@ class QuestionsList extends Component {
   }
 
   showAddQuestionModal() {
-    console.log("inside add question modal function")
     this.setState({ showAddQuestionLayer: true })
-    console.log("")
-    console.log(`state : ${this.state}`)
-    console.log("")
   }
 
   renderQuestionRows() {

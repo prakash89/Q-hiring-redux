@@ -5,8 +5,6 @@ const INITIAL_STATE = {
 }
 
 export default (state = INITIAL_STATE, action) => {
-  debugger
-  console.log(`inside reducer action: ${action}`)
   switch(action.type){
     case QUESTIONSLIST:
       let questions  = action.payload;

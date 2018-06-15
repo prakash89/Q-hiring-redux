@@ -13,6 +13,7 @@ import Title from 'grommet/components/Title';
 import Value from 'grommet/components/Value';
 import Login from './components/login';
 import Signup from './components/signup';
+import Feedback from './components/feedback';
 import Instaction from './components/instaction';
 import QuestionsList from './components/questionsList';
 import './app.css';
@@ -42,8 +43,8 @@ class Main extends Component {
               pad={{ horizontal: 'medium' }}>
               <Title>Q-Hiring</Title>
               <Link to="/login" className="padding-left-fix">LogIn</Link>
-              <Link to="/" className="padding-right-fix">SignUp</Link>
-              <Link to="/instaction" className="padding-right-fix">Instaction</Link>
+              <Link to="/" >SignUp</Link>
+              <Link to="/instaction" >Instaction</Link>
               <Link to="/feedback">Feedback</Link>
               <Link to="/QuestionsList">List all the questions</Link>
             </Header>

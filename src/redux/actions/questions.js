@@ -6,8 +6,9 @@ export const questionsList = (params) => {
     fetch(URL, {
       method: 'GET',
       headers: {
+        "email": localStorage.getItem("userEmail"),
         "Content-Type": "application/json",
-        Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQG1haWxpbmF0b3IuY29tIiwiaWF0IjoxNTI4OTc4Nzg4LCJleHAiOjE1Mjg5ODIzODh9.aS-arbQpuux2uDzaGgmb8vaxNPwUnlpJZ6-1DB-wDMY"
+        "Authorization": localStorage.getItem("idToken")
       }
     })
     .then(response => response.json())

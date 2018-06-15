@@ -9,14 +9,12 @@ export const signup = (params) => {
     })
     .then(response => response.json())
     .then(json => {
-      console.log('response', json)
       dispatch({
         type: SIGNUP,
         payload: json
       })
     })
     .catch(error => {
-      console.log('error response', error)
     })
   }
 }
