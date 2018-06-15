@@ -1,8 +1,9 @@
 import { QUESTIONSLIST } from "../actionTypes";
+import { API_END_POINT } from '../../app';
 
 export const questionsList = (params) => {
   return (dispatch) => {
-    const URL = 'http://localhost:3001/allQuestions';
+    const URL = API_END_POINT + 'allQuestions';
     fetch(URL, {
       method: 'GET',
       headers: {

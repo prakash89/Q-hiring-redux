@@ -44,7 +44,7 @@ class Main extends Component {
               <Title>Q-Hiring</Title>
               <Link to="/login" className="padding-left-fix">LogIn</Link>
               <Link to="/" >SignUp</Link>
-              <Link to="/instaction" >Instaction</Link>
+              <Link to="/instaction" >Instructions</Link>
               <Link to="/feedback">Feedback</Link>
               <Link to="/QuestionsList">List all the questions</Link>
             </Header>
