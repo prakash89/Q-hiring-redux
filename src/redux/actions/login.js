@@ -1,8 +1,11 @@
 import {LOGIN} from '../actionTypes'
+import API_END_POINT from '../../app'
+
 
 export const login = (params) => {
   return (dispatch) => {
-    const URL = 'http://localhost:3001/login'
+    const URL = `${API_END_POINT}login`;
+    console.log(URL);
     fetch(URL, {
       method: 'POST',
       body: JSON.stringify(params),

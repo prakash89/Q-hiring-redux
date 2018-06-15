@@ -15,6 +15,7 @@ import Login from './components/login';
 import Signup from './components/signup';
 import Instruction from './components/instruction';
 import Feedback from './components/feedback';
+import Questions from './components/questions';
 import './app.css';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
@@ -36,12 +37,14 @@ class Main extends Component {
               <Link to="/">SignUp</Link>
               <Link to="/instruction">Instruction</Link>
               <Link to="/feedback">Feedback</Link>
+              <Link to="/questions">Questions</Link>
             </Header>
             <Box pad='medium'>
               <Route exact path="/" component={Signup} />
               <Route path="/login" component={Login} />
               <Route path="/instruction" component={Instruction} />
               <Route path="/feedback" component={Feedback} />
+              <Route path="/questions" component={Questions} />
             </Box>
           </App>
         </BrowserRouter>
