@@ -3,7 +3,8 @@ import 'grommet/scss/hpe/index';
 
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Switch,Link, Redirect } from 'react-router-dom';
+// import { BrowserRouter, Route, Switch,Link, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import App from 'grommet/components/App';
 import Box from 'grommet/components/Box';
 import Header from 'grommet/components/Header';
@@ -27,7 +28,7 @@ class Main extends Component {
   render() {
     return (
       <Provider store={store}>
-        <BrowserRouter>
+        <Router>
           <App centered={false}>
             <Header direction="row" justify="between" size="large"
               pad={{ horizontal: 'medium' }}>
@@ -44,7 +45,7 @@ class Main extends Component {
               <Route path="/feedback" component={Feedback} />
             </Box>
           </App>
-        </BrowserRouter>
+        </Router>
       </Provider>
     );
   }
