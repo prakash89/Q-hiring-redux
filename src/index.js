@@ -3,7 +3,8 @@ import 'grommet/scss/hpe/index';
 
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Switch, Link, Redirect } from 'react-router-dom';
+// import { BrowserRouter, Route, Switch,Link, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import App from 'grommet/components/App';
 import Box from 'grommet/components/Box';
 import Header from 'grommet/components/Header';
@@ -37,26 +38,26 @@ class Main extends Component {
   render() {
     return(
       <Provider store={store}>
-        <BrowserRouter>
+        <Router>
           <App centered={false}>
             <Header direction="row" justify="between" size="large"
               pad={{ horizontal: 'medium' }}>
               <Title>Q-Hiring</Title>
               <Link to="/login" className="padding-left-fix">LogIn</Link>
               <Link to="/" >SignUp</Link>
-              <Link to="/instaction" >Instructions</Link>
+              <Link to="/instruction" >Instructions</Link>
               <Link to="/feedback">Feedback</Link>
               <Link to="/QuestionsList">List all the questions</Link>
             </Header>
             <Box pad='medium'>
               <Route exact path="/" component={Signup} />
               <Route path="/login" component={Login} />
-              <Route path="/instaction" component={Instaction} />
+              <Route path="/instruction" component={Instaction} />
                <Route path="/feedback" component={Feedback} />
               <Route path="/QuestionsList" component={QuestionsList} />
             </Box>
           </App>
-        </BrowserRouter>
+        </Router>
       </Provider>
     );
   }
