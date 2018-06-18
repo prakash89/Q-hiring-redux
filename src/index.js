@@ -16,6 +16,7 @@ import Signup from './components/signup';
 import Feedback from './components/feedback';
 import Instaction from './components/instaction';
 import QuestionsList from './components/questionsList';
+import Callback from './components/callback';
 import './app.css';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
@@ -36,8 +37,8 @@ class Main extends Component {
 
   render() {
     return(
-      <Provider store={store}>
-        <BrowserRouter>
+      <BrowserRouter>
+        <Provider store={store}>
           <App centered={false}>
             <Header direction="row" justify="between" size="large"
               pad={{ horizontal: 'medium' }}>
@@ -49,15 +50,16 @@ class Main extends Component {
               <Link to="/QuestionsList">List all the questions</Link>
             </Header>
             <Box pad='medium'>
-              <Route exact path="/" component={Signup} />
+              <Route path="/" component={Signup} />
               <Route path="/login" component={Login} />
               <Route path="/instaction" component={Instaction} />
                <Route path="/feedback" component={Feedback} />
               <Route path="/QuestionsList" component={QuestionsList} />
+              <Route path="/callback" component={Callback} />
             </Box>
           </App>
-        </BrowserRouter>
-      </Provider>
+        </Provider>
+      </BrowserRouter>
     );
   }
 };

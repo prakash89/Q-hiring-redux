@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import LoginForm from 'grommet/components/LoginForm';
-import {connect} from 'react-redux';
-import {login} from '../redux/actions';
+import { connect } from 'react-redux';
+import { login } from '../redux/actions';
 import { Redirect, HashRouter } from 'react-router-dom';
+import Auth from '../Auth';
+import { Button } from 'grommet';
 
 
 class Login extends Component {
@@ -10,7 +12,13 @@ class Login extends Component {
     super(props);
   }
 
-  loginSubmit(user_params){
+  authLogin() {
+    console.log("Inside the authLogiin button click")
+    const auth = new Auth();
+    auth.login();
+  }
+
+  loginSubmit(user_params) {
 
     let params = {
       email: user_params.username,
@@ -20,26 +28,31 @@ class Login extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.message == "You have successfully signed up.") {
+    if (nextProps.message == "You have successfully signed up.") {
       this.props.history.push('/instaction')
     }
   }
 
-  render(){
-    return(
-      <LoginForm
-        title='Login'
-        rememberMe={false}
-        onSubmit={(user_params) => this.loginSubmit(user_params)}/>
-      )
+  render() {
+    return (
+      <div>
+        <LoginForm
+          title='Login'
+          rememberMe={false}
+          onSubmit={(user_params) => this.loginSubmit(user_params)} />
+        <Button
+          label='Login through auth0'
+          onClick={() => this.authLogin()} />
+      </div>
+    )
   }
 }
 
-const mapStateToProps = ({loginData}) => {
+const mapStateToProps = ({ loginData }) => {
   return ({
-  message: loginData.message,
-  idToken: loginData.id_token,
-  email: loginData.email
+    message: loginData.message,
+    idToken: loginData.id_token,
+    email: loginData.email
   })
   // let {message,id_token} = loginData
   // return {message,id_token}
@@ -53,4 +66,4 @@ const mapStateToProps = ({loginData}) => {
 
 // export default connect(mapStateToProps,mapDispatchToProps)(Login);
 
-export default connect(mapStateToProps,{login})(Login);
+export default connect(mapStateToProps, { login })(Login);

@@ -9,6 +9,7 @@
     "url": "https://github.com/grommet/grommet-standalone.git"
   },
   "dependencies": {
+    "auth0-js": "^9.6.1",
     "grommet": "^1.0.0",
     "react": "^15.2.0",
     "react-dom": "^15.2.0",
