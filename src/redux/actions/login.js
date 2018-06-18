@@ -4,7 +4,7 @@ import { Redirect, HashRouter } from 'react-router-dom';
 export const login = (params) => {
   return (dispatch) => {
     const URL = 'http://localhost:3001/login'
-    fetch(URL, {
+    return fetch(URL, {
       method: 'POST',
       body: JSON.stringify(params),
     })
