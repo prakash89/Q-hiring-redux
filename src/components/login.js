@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import LoginForm from 'grommet/components/LoginForm';
-import {connect} from 'react-redux';
-import {login} from '../redux/actions';
+import { connect } from 'react-redux';
+import { login } from '../redux/actions';
 import { Redirect, HashRouter } from 'react-router-dom';
+import Auth from '../Auth';
+import { Button } from 'grommet';
 
 
 class Login extends Component {
@@ -10,40 +12,47 @@ class Login extends Component {
     super(props);
   }
 
-  loginSubmit(user_params){
+  authLogin() {
+    console.log("Inside the authLogiin button click")
+    const auth = new Auth();
+    auth.login();
+  }
 
-    console.log('loooooo', user_params)
+  loginSubmit(user_params) {
+
     let params = {
       email: user_params.username,
       password: user_params.password
     }
     this.props.login(params)
-    console.log('i am here');
   }
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.message == "You have successfully signed up.") {
-      console.log("done here", nextProps.message)
+    if (nextProps.message == "You have successfully signed up.") {
       this.props.history.push('/instaction')
     }
   }
 
-  render(){
-    return(
-      <LoginForm
-        title='Login'
-        rememberMe={false}
-        onSubmit={(user_params) => this.loginSubmit(user_params)}/>
-      )
+  render() {
+    return (
+      <div>
+        <LoginForm
+          title='Login'
+          rememberMe={false}
+          onSubmit={(user_params) => this.loginSubmit(user_params)} />
+        <Button
+          label='Login through auth0'
+          onClick={() => this.authLogin()} />
+      </div>
+    )
   }
 }
 
-const mapStateToProps = ({loginData}) => {
-  console.log('loginData', loginData)
-  localStorage.setItem('idToken', loginData.id_token);
+const mapStateToProps = ({ loginData }) => {
   return ({
-  message: loginData.message,
-  idToken: loginData.id_token
+    message: loginData.message,
+    idToken: loginData.id_token,
+    email: loginData.email
   })
   // let {message,id_token} = loginData
   // return {message,id_token}
@@ -57,4 +66,4 @@ const mapStateToProps = ({loginData}) => {
 
 // export default connect(mapStateToProps,mapDispatchToProps)(Login);
 
-export default connect(mapStateToProps,{login})(Login);
+export default connect(mapStateToProps, { login })(Login);

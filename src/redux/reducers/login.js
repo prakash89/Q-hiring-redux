@@ -3,6 +3,7 @@ import {LOGIN} from '../actionTypes'
 const INITIAL_STATE = {
   message: '',
   id_token: '',
+  email: ''
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -12,7 +13,8 @@ export default (state = INITIAL_STATE, action) => {
       console.log('Reducer action - ', action)
       let message = action.payload.message
       let id_token = action.payload.session.authToken
-      return {...state, message, id_token};
+      let email = action.payload.user.email
+      return {...state, message, id_token, email};
     default:
       return state;
   }
