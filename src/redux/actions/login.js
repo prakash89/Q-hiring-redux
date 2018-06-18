@@ -1,10 +1,12 @@
 import {LOGIN} from '../actionTypes'
-import { Redirect, HashRouter } from 'react-router-dom';
+import API_END_POINT from '../../app'
+
 
 export const login = (params) => {
   return (dispatch) => {
-    const URL = 'http://localhost:3001/login'
-    return fetch(URL, {
+    const URL = `${API_END_POINT}login`;
+    console.log(params);
+    fetch(URL, {
       method: 'POST',
       body: JSON.stringify(params),
     })

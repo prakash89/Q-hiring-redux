@@ -16,6 +16,7 @@ import Value from 'grommet/components/Value';
 import Login from './components/login';
 import Signup from './components/signup';
 import Feedback from './components/feedback';
+import Questions from './components/questions';
 import Instaction from './components/instaction';
 import QuestionsList from './components/questionsList';
 import Callback from './components/callback';
@@ -61,14 +62,14 @@ class Main extends Component {
               <Link to="/" >SignUp</Link>
               <Link to="/instaction" >Instructions</Link>
               <Link to="/feedback">Feedback</Link>
+              <Link to="/questions">Questions</Link>
               <Link to="/QuestionsList">List all the questions</Link>
             </Header>
             <Box pad='medium'>
               <Route exact path="/" component={Signup} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/instaction" component={Instaction} />
-               <Route exact path="/feedback" component={Feedback} />
-              <Route exact path="/QuestionsList" component={QuestionsList} />
+              <Route path="/questions" component={Questions} />
               <Route path="/callback" render={(props) => {
                 handleAuthentication(props);
                 return <Callback {...props} /> 
