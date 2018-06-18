@@ -6,6 +6,7 @@ import { questionsList } from "../redux/actions";
 import Article from 'grommet/components/Article';
 import Button from 'grommet/components/Button';
 import { Layer, Box, Split } from 'grommet';
+import AddQuestionsModal from './addQuestionsModal';
 
 import '../css/questionsList.css';
 
@@ -16,6 +17,10 @@ class QuestionsList extends Component {
     this.state = {
       showAddQuestionLayer: false
     }
+  }
+
+  onclose(){
+
   }
 
   componentDidMount() {
@@ -103,8 +108,10 @@ class QuestionsList extends Component {
             </tbody>
           </Table>
           {this.state.showAddQuestionLayer &&
-            <Layer closer={true}>
-              <div>hai</div>
+            <Layer
+              closer={true}
+            onClose={() =>this.onclose()}>
+              <AddQuestionsModal />
             </Layer>}
         </Article>
       </div>
