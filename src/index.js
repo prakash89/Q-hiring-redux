@@ -3,7 +3,9 @@ import 'grommet/scss/hpe/index';
 
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Switch, Link, Redirect } from 'react-router-dom';
+
+// import { BrowserRouter, Route, Switch,Link, Redirect } from 'react-router-dom';
+import { Router, Route, Link } from 'react-router-dom'
 import App from 'grommet/components/App';
 import Box from 'grommet/components/Box';
 import Header from 'grommet/components/Header';
@@ -22,8 +24,19 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import reducers from './redux/reducers';
+import Auth from './Auth';
+import browserHistory from './history';
 
 const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
+
+
+const auth = new Auth();
+
+const handleAuthentication = ({location}) => {
+  if (/access_token|id_token|error/.test(location.hash)) {
+    auth.handleAuthentication();
+  }
+}
 
 class Main extends Component {
 
@@ -36,9 +49,10 @@ class Main extends Component {
   }
 
   render() {
-    return(
-      <BrowserRouter>
-        <Provider store={store}>
+
+    return (
+      <Provider store={store}>
+        <Router history={browserHistory}>
           <App centered={false}>
             <Header direction="row" justify="between" size="large"
               pad={{ horizontal: 'medium' }}>
@@ -50,16 +64,19 @@ class Main extends Component {
               <Link to="/QuestionsList">List all the questions</Link>
             </Header>
             <Box pad='medium'>
-              <Route path="/" component={Signup} />
-              <Route path="/login" component={Login} />
-              <Route path="/instaction" component={Instaction} />
-               <Route path="/feedback" component={Feedback} />
-              <Route path="/QuestionsList" component={QuestionsList} />
-              <Route path="/callback" component={Callback} />
+              <Route exact path="/" component={Signup} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/instaction" component={Instaction} />
+               <Route exact path="/feedback" component={Feedback} />
+              <Route exact path="/QuestionsList" component={QuestionsList} />
+              <Route path="/callback" render={(props) => {
+                handleAuthentication(props);
+                return <Callback {...props} /> 
+                }}/> 
             </Box>
           </App>
-        </Provider>
-      </BrowserRouter>
+        </Router>
+      </Provider>
     );
   }
 };

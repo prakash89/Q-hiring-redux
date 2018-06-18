@@ -1,4 +1,5 @@
 import auth0 from 'auth0-js';
+import browserHistory from './history';
 
 export default class Auth {
 
@@ -20,10 +21,9 @@ handleAuthentication() {
   this.auth0.parseHash((err, authResult) => {
     console.log(`error: ${err} OR authResult: ${authResult}`)
     if (authResult && authResult.accessToken && authResult.idToken) {
-      // this.setSession(authResult);
+      this.setSession(authResult);
       console.log(authResult)
-      // register({ email: authResult.idTokenPayload.name })
-      // browserHistory.push('/home');
+      browserHistory.push('/instaction');
     } else if (err) {
       console.log(err);
       alert(`Error: ${err.error}. Check the console for further details.`);
@@ -34,22 +34,20 @@ handleAuthentication() {
 setSession(authResult) {
   console.log("Inside the setSession");
   // Set the time that the access token will expire at
-  // let expiresAt = JSON.stringify(
-  //   authResult.expiresIn * 1000 + new Date().getTime()
-  // );
-  // If there is a value on the `scope` param from the authResult,
-  // use it to set scopes in the session for the user. Otherwise
-  // use the scopes as requested. If no scopes were requested,
-  // set it to nothing
-  // const scopes = authResult.scope || this.requestedScopes || '';
+  let expiresAt = JSON.stringify(
+    authResult.expiresIn * 1000 + new Date().getTime()
+  );
+  /*If there is a value on the `scope` param from the authResult,
+  use it to set scopes in the session for the user. Otherwise
+  use the scopes as requested. If no scopes were requested,
+  set it to nothing*/
+  const scopes = authResult.scope || this.requestedScopes || '';
 
-  // localStorage.setItem('access_token', authResult.accessToken);
-  // localStorage.setItem('id_token', authResult.idToken);
-  // localStorage.setItem('expires_at', expiresAt);
-  // localStorage.setItem('scopes', JSON.stringify(scopes));
-  // localStorage.setItem('email', authResult.idTokenPayload.name);
-  // navigate to the home route
-  // history.replace('/home');
+  localStorage.setItem('access_token', authResult.accessToken);
+  localStorage.setItem('id_token', authResult.idToken);
+  localStorage.setItem('expires_at', expiresAt);
+  localStorage.setItem('scopes', JSON.stringify(scopes));
+  localStorage.setItem('email', authResult.idTokenPayload.name);
 }
 
 isAuthenticated() {
