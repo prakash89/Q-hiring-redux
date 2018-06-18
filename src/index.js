@@ -14,8 +14,9 @@ import Title from 'grommet/components/Title';
 import Value from 'grommet/components/Value';
 import Login from './components/login';
 import Signup from './components/signup';
-import Instruction from './components/instruction';
 import Feedback from './components/feedback';
+import Instaction from './components/instaction';
+import QuestionsList from './components/questionsList';
 import './app.css';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
@@ -25,8 +26,17 @@ import reducers from './redux/reducers';
 const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
 
 class Main extends Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+      loginRedirectRef: false,
+      signRedirectRef: false
+    }
+  }
+
   render() {
-    return (
+    return(
       <Provider store={store}>
         <Router>
           <App centered={false}>
@@ -34,15 +44,17 @@ class Main extends Component {
               pad={{ horizontal: 'medium' }}>
               <Title>Q-Hiring</Title>
               <Link to="/login" className="padding-left-fix">LogIn</Link>
-              <Link to="/">SignUp</Link>
-              <Link to="/instruction">Instruction</Link>
+              <Link to="/" >SignUp</Link>
+              <Link to="/instruction" >Instructions</Link>
               <Link to="/feedback">Feedback</Link>
+              <Link to="/QuestionsList">List all the questions</Link>
             </Header>
             <Box pad='medium'>
               <Route exact path="/" component={Signup} />
               <Route path="/login" component={Login} />
-              <Route path="/instruction" component={Instruction} />
-              <Route path="/feedback" component={Feedback} />
+              <Route path="/instruction" component={Instaction} />
+               <Route path="/feedback" component={Feedback} />
+              <Route path="/QuestionsList" component={QuestionsList} />
             </Box>
           </App>
         </Router>

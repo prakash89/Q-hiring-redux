@@ -15,14 +15,12 @@ export const feedback = (params) => {
 		})
 			.then(response => response.json())
 			.then(json => {
-				console.log('login json - ', json)
 				dispatch({
 					type: FEEDBACK,
 					payload: json
 				})
 			})
 			.catch(error => {
-				console.log('login error - ', error)
 			})
 	}
 }
