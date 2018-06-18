@@ -1,5 +1,6 @@
 import { QUESTIONS } from '../actionTypes'
 import API_END_POINT from '../../app'
+import { QUESTIONSLIST } from "../actionTypes";
 
 export const fetchQuestions = () => {
 	return (dispatch) => {
@@ -28,7 +29,7 @@ export const fetchQuestions = () => {
 
 export const submitAnswers = (answers, section_number) => {
 	var params = {
-        exam: {
+      exam: {
 		   section_number: section_number,
 		   answers: answers,
 		   user_id: localStorage.getItem('userId'),
@@ -53,4 +54,46 @@ export const submitAnswers = (answers, section_number) => {
 				console.log('submitAnswers  error - ', error)
 			})
 	}
+}
+
+
+export const questionsList = (params) => {
+  return (dispatch) => {
+		const URL = `${API_END_POINT}allQuestions`;
+    fetch(URL, {
+      method: 'GET',
+      headers: {
+        "email": localStorage.getItem("userEmail"),
+        "Content-Type": "application/json",
+        "Authorization": localStorage.getItem("idToken")
+      }
+    })
+      .then(response => response.json())
+      .then(responseJson => {
+        dispatch({
+          type: QUESTIONSLIST,
+          payload: responseJson.data
+        })
+      })
+  }
+}
+
+export const addQuestion = (params) => {
+  console.log(`params: ${JSON.stringify(params)}`)
+  return (dispatch) => {
+		const URL = `${API_END_POINT}createQuestion`;
+    fetch(URL, {
+      method: 'POST',
+      headers: {
+        "email": localStorage.getItem("userEmail"),
+        "Content-Type": "application/json",
+        "Authorization": localStorage.getItem("idToken")
+      },
+      body: JSON.stringify(params)
+    })
+      .then(response => response.json())
+      .then(responseJson => {
+        console.log("add question response:", responseJson)
+      })
+  }
 }

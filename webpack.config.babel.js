@@ -5,10 +5,13 @@ export default {
   entry: './src/index.js',
   output: {
     path: path.resolve('./dist'),
-    filename: 'index.js'
+    filename: 'index.js',
   },
   resolve: {
     extensions: ['.js', '.scss', '.css', '.json']
+  },
+  devServer: {
+    historyApiFallback: true,
   },
   plugins: [
     new webpack.optimize.UglifyJsPlugin({

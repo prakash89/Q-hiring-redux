@@ -1,4 +1,6 @@
 import {QUESTIONS} from '../actionTypes'
+import { QUESTIONSLIST } from "../actionTypes";
+
 
 const INITIAL_STATE = {
   message: '',
@@ -7,6 +9,7 @@ const INITIAL_STATE = {
     quantitative: [],
     verbal: [],
   },
+  questions: []
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -16,6 +19,9 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         items: action.questions,
       };
+      case QUESTIONSLIST:
+      let questions  = action.payload;
+      return { ...state, questions }
     default:
       return state;
   }

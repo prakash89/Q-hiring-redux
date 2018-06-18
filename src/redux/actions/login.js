@@ -12,13 +12,23 @@ export const login = (params) => {
     })
     .then(response => response.json())
     .then(json => {
+      console.log(`json data: ${JSON.stringify(json)}`)
+      localStorage.setItem('idToken', json.session.authToken);
+      localStorage.setItem('userEmail', json.user.email);
+      localStorage.setItem('userRole', json.user.userRole);
       dispatch({
         type: LOGIN,
         payload: json
       })
+      if (json.user.userRole == "admin") {
+        this.props.history.push('/QuestionsList')
+      }else{
+        this.props.history.push('/instaction')
+      }
+
     })
     .catch( error => {
-      console.log('login error - ', error)
+      console.log("error",error);
     })
   }
 }

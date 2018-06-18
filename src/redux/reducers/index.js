@@ -4,7 +4,6 @@ import signupReducer from './signup';
 import feedbackReducer from './feedback';
 import questonsReducer from './questions';
 
-
 export default combineReducers({
   loginData: loginReducer,
   signupData: signupReducer,
