@@ -6,7 +6,6 @@ export default {
   output: {
     path: path.resolve('./dist'),
     filename: 'index.js',
-    publicPath: '/',
   },
   resolve: {
     extensions: ['.js', '.scss', '.css', '.json']

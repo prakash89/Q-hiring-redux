@@ -64,17 +64,14 @@ class Signup extends Component {
       phone: this.state.phone,
       city: this.state.city,
     }
-    console.log('form valid', this.state.formValid)
     if(this.state.formValid == true) {
       this.props.signup(params)
     }
 
-    console.log("params", params)
   }
 
   componentWillReceiveProps(nextProps) {
     if(nextProps.success) {
-      console.log('signup');
     }
   }
 
@@ -123,7 +120,6 @@ class Signup extends Component {
         break;
       case 'passwordconfirmation':
         confirmPasswordValid = (this.state.password == value);
-        console.log("dddddddd", confirmPasswordValid)
         fieldValidationErrors.passwordconfirmation = confirmPasswordValid ? '': 'not match';
         break;
       case 'collage':
@@ -208,7 +204,6 @@ class Signup extends Component {
 }
 
 const mapStateToProps = ({signupData}) => {
-    console.log("signupData", signupData)
   return({
     message: signupData.message,
     email: signupData.email,
