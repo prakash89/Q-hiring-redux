@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import Title from 'grommet/components/Title';
 import FormField from 'grommet/components/FormField';
 import RadioButton from 'grommet/components/RadioButton';
-import {fetchQuestions} from '../redux/actions/questions';
+import {fetchQuestions, submitAnswers} from '../redux/actions/questions';
+import Button from 'grommet/components/Button';
 
 class Questions extends Component {
 	constructor(props) {
@@ -40,6 +41,7 @@ class Questions extends Component {
 	  
 	render() {
 		console.log('Inside Render', this.state);
+		let {userAnswers} = this.props;
 		return (
 			<div className="container mb-5">
 			   <div>
@@ -70,6 +72,12 @@ class Questions extends Component {
 				);
 			  })}
 			   </div>
+			   <div>
+			      <Button label='Submit'
+                     type='submit'
+					 primary={true}
+					 onClick={(e) => userAnswers(this.state.questions.verbal, 1)}/>
+			   </div>
 			</div>
 		)
 	}
@@ -84,6 +92,9 @@ const mapDispatchToProps = (dispatch) => ({
 	requestQuestions() {
 	  dispatch(fetchQuestions());
 	},
+	userAnswers(answers, section_number) {
+		dispatch(submitAnswers(answers, section_number));
+	  },
 });
   
 

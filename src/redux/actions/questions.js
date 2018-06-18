@@ -25,3 +25,32 @@ export const fetchQuestions = () => {
 			})
 	}
 }
+
+export const submitAnswers = (answers, section_number) => {
+	var params = {
+        exam: {
+		   section_number: section_number,
+		   answers: answers,
+		   user_id: localStorage.getItem('userId'),
+	    }
+	};
+	return (dispatch) => {
+		const URL = `${API_END_POINT}results`;
+		fetch(URL, {
+			method: 'POST',
+			headers: {
+				"Content-Type": "application/json",
+				"Authorization": localStorage.getItem('idToken'),
+				"email": localStorage.getItem('userEmail')
+			},
+			body: JSON.stringify(params),
+		})
+			.then(response => response.json())
+			.then(json => {
+				console.log('submitAnswers success - ', json)
+			})
+			.catch(error => {
+				console.log('submitAnswers  error - ', error)
+			})
+	}
+}
