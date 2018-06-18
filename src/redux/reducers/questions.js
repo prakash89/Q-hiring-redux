@@ -2,7 +2,11 @@ import {QUESTIONS} from '../actionTypes'
 
 const INITIAL_STATE = {
   message: '',
-  items: [],
+  items: {
+    logical: [],
+    quantitative: [],
+    verbal: [],
+  },
 }
 
 export default (state = INITIAL_STATE, action) => {

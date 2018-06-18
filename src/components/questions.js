@@ -5,80 +5,65 @@ import FormField from 'grommet/components/FormField';
 import RadioButton from 'grommet/components/RadioButton';
 import {fetchQuestions} from '../redux/actions/questions';
 
-
 class Questions extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			checked: null
+			checked: null,
+			questions: {
+				logical: [],
+                quantitative: [],
+                verbal: [],
+			}
 		}
 	}
 
 	componentDidMount() {
 		this.props.requestQuestions();
+	}
+
+	componentWillReceiveProps(nextProps){
+		if (nextProps.questionList !== this.props.questionList) {
+		  this.setState({ questions: nextProps.questionList })
+		}
 	  }
 
-	  select(value) {
-		// this.setState({checked: value})
+
+	handleOptionChange(index, option) {
+		let category = this.state.questions;
+        category.verbal[index].user_answer = option
+        this.setState({
+			questions: category
+        })
 	  }
 
-
+	  
 	render() {
-		console.log('requestQuestions', this.props);
-		let {questionList} = this.props;
-		console.log('questionList', questionList);
+		console.log('Inside Render', this.state);
 		return (
 			<div className="container mb-5">
-			  <FormField>
-			    <Title>
-				   Pick the odd one out
-			    </Title>
-                <RadioButton id='choice1-1'
-                  name='choice1-1'
-                  label='Mars'
-				  checked={'Mars' == this.state.checked}
-				  onChange={
-					this.select('Mars')
-				  }
-                   />
-                <RadioButton id='choice1-2'
-                  name='choice1-2'
-                  label='Jupiter'
-				  checked={'Jupiter' == this.state.checked}
-				  onChange={
-					this.select('Jupiter')
-				  }
-				   />
-				   <RadioButton id='choice1-1'
-                  name='choice1-1'
-                  label='Sun'
-                  checked={false}
-                   />
-                <RadioButton id='choice1-2'
-                  name='choice1-2'
-                  label='Earth'
-                  checked={false}
-                   />
-			   </FormField>
-			   
 			   <div>
-			   { questionList.logical && 
-				questionList.logical.map((item, index) => {
+			   <Title truncate={false} pad='small'>
+					Verbal Section 
+				</Title>
+			   {  
+				this.state.questions.verbal.map((item, index) => {
+				let that = this;
 				return (
 					<div className="container mb-5" key={item.id}>
 					   <Title truncate={false} pad='medium'>
-					      {item.title}
+					      {index+1}.{item.title}
 						</Title>
-						
 						{item.options.map(function (option) {
 							return (
 							  <div key={option}>
 								<RadioButton id={option}
 								name={option}
 								label={option}
-								checked={false}
+								checked={item.user_answer == option}
+								onChange={(e) => that.handleOptionChange(index,option)}
 								 />
-							</div>
+							  </div>
 							);
 						  })}
 				   </div>
