@@ -37,8 +37,13 @@ class Questions extends Component {
 		let category = this.state.questions;
 		let category_type = `${category}.${section_type}[${index}].user_answer`;
 		console.log(category_type);
-		category_type = option;
-		console.log(category);
+		if (section_type === 'verbal') {
+			category.verbal[index].user_answer = option;
+		} else if (section_type === 'logical') {
+      category.logical[index].user_answer = option;
+		} else if (section_type === 'quantitative') {
+      category.quantitative[index].user_answer = option;
+		}
     this.setState({
 			questions: category
     })
