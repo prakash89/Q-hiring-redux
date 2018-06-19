@@ -1,6 +1,11 @@
-import { QUESTIONS } from '../actionTypes'
+import { 
+	QUESTIONS,
+	SHOWVERBAL,
+	SHOWLOGICAL,
+	SHOWQUANTITATIVE,
+	QUESTIONSLIST,
+} from '../actionTypes'
 import API_END_POINT from '../../app'
-import { QUESTIONSLIST } from "../actionTypes";
 
 export const fetchQuestions = () => {
 	return (dispatch) => {
@@ -48,6 +53,21 @@ export const submitAnswers = (answers, section_number) => {
 		})
 			.then(response => response.json())
 			.then(json => {
+				if (section_number === 1) {
+					dispatch({
+						type: SHOWLOGICAL,
+					})
+				}
+				if (section_number === 2) {
+					dispatch({
+						type: SHOWQUANTITATIVE,
+					})
+				}
+				if (section_number === 3) {
+					dispatch({
+						type: SHOWVERBAL,
+					})
+				}
 				console.log('submitAnswers success - ', json)
 			})
 			.catch(error => {

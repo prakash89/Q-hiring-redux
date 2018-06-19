@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import '../css/instaction.css';
+import { Button } from 'grommet';
+import { Link } from 'react-router-dom'
 
 class Instaction extends Component {
   constructor(props) {
@@ -20,7 +22,13 @@ class Instaction extends Component {
           <div className="ui red segment">Submission on each section - Once answers for a section is submitted you cannot revisit that section.</div>
           <div className="row align-items-center justify-content-center">
             <div className="col-md-8 text-center">
-              <button mat-raised-button color="primary" routerLink="/questions" type="submit">Next</button>
+              <Button
+                label='Next'
+                type='submit'
+					      primary={true}
+              >
+               </Button>
+               <Link to="/instaction">Next</Link>
             </div>
           </div>
         </div>

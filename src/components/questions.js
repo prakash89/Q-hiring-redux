@@ -13,9 +13,12 @@ class Questions extends Component {
 			checked: null,
 			questions: {
 				logical: [],
-                quantitative: [],
-                verbal: [],
-			}
+        quantitative: [],
+        verbal: [],
+			},
+			showVerbal: props.questions.showVerbal,
+			showLogical: props.questions.showLogical,
+			showQuantitative: props.questions.showQuantitative,
 		}
 	}
 
@@ -23,20 +26,23 @@ class Questions extends Component {
 		this.props.requestQuestions();
 	}
 
-	componentWillReceiveProps(nextProps){
+	componentWillReceiveProps(nextProps) {
 		if (nextProps.questionList !== this.props.questionList) {
-		  this.setState({ questions: nextProps.questionList })
+			this.setState({ questions: nextProps.questionList })
 		}
-	  }
+	}
 
 
-	handleOptionChange(index, option) {
+	handleOptionChange(index, option, section_type) {
 		let category = this.state.questions;
-        category.verbal[index].user_answer = option
-        this.setState({
+		let category_type = `${category}.${section_type}[${index}].user_answer`;
+		console.log(category_type);
+		category_type = option;
+		console.log(category);
+    this.setState({
 			questions: category
-        })
-	  }
+    })
+	}
 
 	  
 	render() {
@@ -44,40 +50,43 @@ class Questions extends Component {
 		let {userAnswers} = this.props;
 		return (
 			<div className="container mb-5">
-			   <div>
+			  <div>
 			   <Title truncate={false} pad='small'>
 					Verbal Section 
 				</Title>
-			   {  
-				this.state.questions.verbal.map((item, index) => {
-				let that = this;
-				return (
-					<div className="container mb-5" key={item.id}>
-					   <Title truncate={false} pad='medium'>
-					      {index+1}.{item.title}
-						</Title>
-						{item.options.map(function (option) {
-							return (
-							  <div key={option}>
-								<RadioButton id={option}
-								name={option}
-								label={option}
-								checked={item.user_answer == option}
-								onChange={(e) => that.handleOptionChange(index,option)}
-								 />
-							  </div>
-							);
+			   { this.state.showVerbal &&
+				    this.state.questions.verbal.map((item, index) => {
+				    let that = this;
+				    return (
+					    <div className="container mb-5" key={item.id}>
+					      <Title truncate={false} pad='medium'>
+					        {index+1}.{item.title}
+					    	</Title>
+						    {item.options.map(function (option) {
+							    return (
+							      <div key={option}>
+										  <RadioButton 
+										    id={option}
+								        name={option}
+								        label={option}
+								        checked={item.user_answer == option}
+								        onChange={(e) => that.handleOptionChange(index,option,'verbal')}
+								       />
+							      </div>
+							   );
 						  })}
 				   </div>
-				);
-			  })}
-			   </div>
-			   <div>
-			      <Button label='Submit'
-                     type='submit'
+				  );
+				 })}
+				 <div>
+				 <Button 
+					 label='Next'
+					 type='submit'
 					 primary={true}
 					 onClick={(e) => userAnswers(this.state.questions.verbal, 1)}/>
-			   </div>
+			</div>
+				 </div>
+				 
 			</div>
 		)
 	}
@@ -86,6 +95,7 @@ class Questions extends Component {
 
 const mapStateToProps = (state) => ({
 	questionList: state.questionsData.items,
+	questions: state.questionsData,
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -63,7 +63,6 @@ class Main extends Component {
               <Link to="/instaction" >Instructions</Link>
               <Link to="/feedback">Feedback</Link>
               <Link to="/questions">Questions</Link>
-              <Link to="/QuestionsList">List all the questions</Link>
             </Header>
             <Box pad='medium'>
               <Route exact path="/" component={Signup} />
