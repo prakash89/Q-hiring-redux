@@ -40,6 +40,7 @@ export const submitAnswers = (answers, section_number) => {
 		   user_id: localStorage.getItem('userId'),
 	    }
 	};
+	console.log('params', params);
 	return (dispatch) => {
 		const URL = `${API_END_POINT}results`;
 		fetch(URL, {

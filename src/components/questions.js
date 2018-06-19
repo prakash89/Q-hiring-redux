@@ -2,9 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Title from 'grommet/components/Title';
 import FormField from 'grommet/components/FormField';
+import Heading from 'grommet/components/Heading';
 import RadioButton from 'grommet/components/RadioButton';
+import Box from 'grommet/components/Box';
 import {fetchQuestions, submitAnswers} from '../redux/actions/questions';
 import Button from 'grommet/components/Button';
+import QUESTION_LIST from '../questions'
 
 class Questions extends Component {
 	constructor(props) {
@@ -13,8 +16,8 @@ class Questions extends Component {
 			checked: null,
 			questions: {
 				logical: [],
-        quantitative: [],
-        verbal: [],
+                quantitative: [],
+                verbal: [],
 			},
 			showVerbal: props.questions.showVerbal,
 			showLogical: props.questions.showLogical,
@@ -24,6 +27,7 @@ class Questions extends Component {
 
 	componentDidMount() {
 		this.props.requestQuestions();
+		console.log('question list', QUESTION_LIST);
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -40,13 +44,13 @@ class Questions extends Component {
 		if (section_type === 'verbal') {
 			category.verbal[index].user_answer = option;
 		} else if (section_type === 'logical') {
-      category.logical[index].user_answer = option;
+            category.logical[index].user_answer = option;
 		} else if (section_type === 'quantitative') {
-      category.quantitative[index].user_answer = option;
+           category.quantitative[index].user_answer = option;
 		}
-    this.setState({
+        this.setState({
 			questions: category
-    })
+        })
 	}
 
 	  
@@ -56,42 +60,74 @@ class Questions extends Component {
 		return (
 			<div className="container mb-5">
 			  <div>
-			   <Title truncate={false} pad='small'>
-					Verbal Section 
-				</Title>
-			   { this.state.showVerbal &&
-				    this.state.questions.verbal.map((item, index) => {
+				<Heading
+				  strong={true}
+				  uppercase={true}
+                  truncate={false}
+				  align='center'
+				  margin='medium'
+				  tag='h4'>
+                     Verbal Section
+                 </Heading>
+			   {
+				QUESTION_LIST[0].questions.map((item, index) => {
 				    let that = this;
 				    return (
-					    <div className="container mb-5" key={item.id}>
+						<div className="container mb-5" key={item.id}>
+						<Box
+						  justify='start'
+						  align='start'
+						  wrap={true}
+                          reverse={false}
+                          pad='medium'
+                          margin='small'
+                          colorIndex='light-2'
+                        >
 					      <Title truncate={false} pad='medium'>
 					        {index+1}.{item.title}
-					    	</Title>
-						    {item.options.map(function (option) {
-							    return (
-							      <div key={option}>
-										  <RadioButton 
-										    id={option}
+					      </Title>
+						  {item.options.map(function (option) {
+							return (
+								<div key={option}>
+								  <Box
+						            justify='start'
+						            align='start'
+						            wrap={true}
+                                    reverse={false}
+                                    margin='small'
+                                    >
+									<RadioButton 
+									  id={option}
 								        name={option}
-								        label={option}
+										label={option}
 								        checked={item.user_answer == option}
 								        onChange={(e) => that.handleOptionChange(index,option,'verbal')}
-								       />
+									   />
+									   </Box>
 							      </div>
 							   );
 						  })}
+				   </Box>
 				   </div>
 				  );
 				 })}
 				 <div>
+				 <Box
+					justify='center'
+					align='center'
+					wrap={true}
+                    reverse={false}
+                    pad='medium'
+                    margin='small'
+                 >
 				 <Button 
 					 label='Next'
 					 type='submit'
-					 primary={true}
+                     accent={true}
 					 onClick={(e) => userAnswers(this.state.questions.verbal, 1)}/>
-			</div>
+					 </Box>
+		        	</div>
 				 </div>
-				 
 			</div>
 		)
 	}
