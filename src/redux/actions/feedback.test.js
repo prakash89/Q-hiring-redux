@@ -12,7 +12,7 @@ describe("Feedback action", () => {
     fetchMock.restore()
   })
   beforeAll(() => {
-    // const localStorage = require('../localStorage') ;
+    const localStorage = require('../localStorage') ;
   });
 
   it("should be able to create feedback", () => {
