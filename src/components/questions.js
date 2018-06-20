@@ -34,6 +34,15 @@ class Questions extends Component {
 		if (nextProps.questionList !== this.props.questionList) {
 			this.setState({ questions: nextProps.questionList })
 		}
+		if (nextProps.questions.showLogical !== this.props.questions.showLogical) {
+			this.setState({ showLogical: nextProps.questions.showLogical })
+			this.setState({ showVerbal: nextProps.questions.showVerbal })
+		}
+		if (nextProps.questions.showQuantitative !== this.props.questions.showQuantitative) {
+			this.setState({ showQuantitative: nextProps.questions.showQuantitative })
+			this.setState({ showLogical: nextProps.questions.showLogical })
+		}
+		console.log(nextProps);
 	}
 
 
@@ -59,6 +68,7 @@ class Questions extends Component {
 		let {userAnswers} = this.props;
 		return (
 			<div className="container mb-5">
+			{ this.state.showVerbal &&
 			  <div>
 				<Heading
 				  strong={true}
@@ -69,8 +79,8 @@ class Questions extends Component {
 				  tag='h4'>
                      Verbal Section
                  </Heading>
-			   {
-				QUESTION_LIST[0].questions.map((item, index) => {
+				 { 
+					this.state.questions.verbal.map((item, index) => {
 				    let that = this;
 				    return (
 						<div className="container mb-5" key={item.id}>
@@ -128,6 +138,149 @@ class Questions extends Component {
 					 </Box>
 		        	</div>
 				 </div>
+				}
+				{ this.state.showLogical &&
+					<div>
+					  <Heading
+						strong={true}
+						uppercase={true}
+						truncate={false}
+						align='center'
+						margin='medium'
+						tag='h4'>
+						   Logical Section
+					   </Heading>
+					   { 
+						  this.state.questions.logical.map((item, index) => {
+						  let that = this;
+						  return (
+							  <div className="container mb-5" key={item.id}>
+							  <Box
+								justify='start'
+								align='start'
+								wrap={true}
+								reverse={false}
+								pad='medium'
+								margin='small'
+								colorIndex='light-2'
+							  >
+								<Title truncate={false} pad='medium'>
+								  {index+1}.{item.title}
+								</Title>
+								{item.options.map(function (option) {
+								  return (
+									  <div key={option}>
+										<Box
+										  justify='start'
+										  align='start'
+										  wrap={true}
+										  reverse={false}
+										  margin='small'
+										  >
+										  <RadioButton 
+											id={option}
+											  name={option}
+											  label={option}
+											  checked={item.user_answer == option}
+											  onChange={(e) => that.handleOptionChange(index,option,'logical')}
+											 />
+											 </Box>
+										</div>
+									 );
+								})}
+						 </Box>
+						 </div>
+						);
+					   })}
+					   <div>
+					   <Box
+						  justify='center'
+						  align='center'
+						  wrap={true}
+						  reverse={false}
+						  pad='medium'
+						  margin='small'
+					   >
+					   <Button 
+						   label='Next'
+						   type='submit'
+						   accent={true}
+						   onClick={(e) => userAnswers(this.state.questions.logical, 2)}/>
+						   </Box>
+						  </div>
+					   </div>
+					  }
+					  { this.state.showQuantitative &&
+						<div>
+						  <Heading
+							strong={true}
+							uppercase={true}
+							truncate={false}
+							align='center'
+							margin='medium'
+							tag='h4'>
+							 Quantitative Section
+						   </Heading>
+						   { 
+							  this.state.questions.quantitative.map((item, index) => {
+							  let that = this;
+							  return (
+								  <div className="container mb-5" key={item.id}>
+								  <Box
+									justify='start'
+									align='start'
+									wrap={true}
+									reverse={false}
+									pad='medium'
+									margin='small'
+									colorIndex='light-2'
+								  >
+									<Title truncate={false} pad='medium'>
+									  {index+1}.{item.title}
+									</Title>
+									{item.options.map(function (option) {
+									  return (
+										  <div key={option}>
+											<Box
+											  justify='start'
+											  align='start'
+											  wrap={true}
+											  reverse={false}
+											  margin='small'
+											  >
+											  <RadioButton 
+												id={option}
+												  name={option}
+												  label={option}
+												  checked={item.user_answer == option}
+												  onChange={(e) => that.handleOptionChange(index,option,'quantitative')}
+												 />
+												 </Box>
+											</div>
+										 );
+									})}
+							 </Box>
+							 </div>
+							);
+						   })}
+						   <div>
+						   <Box
+							  justify='center'
+							  align='center'
+							  wrap={true}
+							  reverse={false}
+							  pad='medium'
+							  margin='small'
+						   >
+						   <Button 
+							   label='Next'
+							   type='submit'
+							   accent={true}
+							   onClick={(e) => userAnswers(this.state.questions.quantitative, 3)}/>
+							   </Box>
+							  </div>
+						   </div>
+						  }
 			</div>
 		)
 	}

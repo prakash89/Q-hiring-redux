@@ -55,6 +55,7 @@ export const submitAnswers = (answers, section_number) => {
 			.then(response => response.json())
 			.then(json => {
 				if (section_number === 1) {
+					console.log(section_number)
 					dispatch({
 						type: SHOWLOGICAL,
 					})

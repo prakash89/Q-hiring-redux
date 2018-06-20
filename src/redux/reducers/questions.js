@@ -45,7 +45,7 @@ export default (state = INITIAL_STATE, action) => {
         showLogical: false,
 	      showQuantitative: true,
       };
-    case SHOWQUANTITATIVE:
+    case SHOWVERBAL:
       return { 
         ...state, 
         showVerbal: true,
