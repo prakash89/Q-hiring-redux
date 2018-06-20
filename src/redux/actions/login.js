@@ -18,11 +18,11 @@ export const login = (params) => {
         type: LOGIN,
         payload: json
       })
-      // if (json.user.userRole == "admin") {
-      //   this.props.history.push('/QuestionsList')
-      // }else{
-      //   this.props.history.push('/instaction')
-      // }
+      if (json.user.userRole == "admin") {
+        this.props.history.push('/QuestionsList')
+      }else{
+        this.props.history.push('/instaction')
+      }
 
     })
     .catch( error => {
