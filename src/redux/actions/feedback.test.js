@@ -12,7 +12,7 @@ describe("Feedback action", () => {
     fetchMock.restore()
   })
   beforeAll(() => {
-    const localStorage = require('../localStorage') ;
+    const localStorage = require('../localStorage');
   });
 
   it("should be able to create feedback", () => {
@@ -20,7 +20,7 @@ describe("Feedback action", () => {
     localStorage.setItem("idToken", "testingToken");
     localStorage.setItem("userEmail", "abc@yopmail.com");
 
-    // fetchMock.post('http://localhost:3001/feedback', { body: res, headers: { 'content-type': 'application/json' } })
+    fetchMock.post('http://localhost:3001/feedback', { body: res, headers: { 'content-type': 'application/json' } })
     const params = {
       email: localStorage.getItem("userEmail"),
       overall: "4",
@@ -40,8 +40,8 @@ describe("Feedback action", () => {
     }
     const store = mockStore(initialState)
     return store.dispatch(actions.feedback(params)).then(() => {
-      console.log("store.getActions() ===", store.getActions())
       expect(store.getActions()).toEqual([expectedAction])
     })
   })
+
 })
