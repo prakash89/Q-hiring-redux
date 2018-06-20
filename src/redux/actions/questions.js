@@ -4,8 +4,9 @@ import {
 	SHOWLOGICAL,
 	SHOWQUANTITATIVE,
 	QUESTIONSLIST,
-} from '../actionTypes'
-import API_END_POINT from '../../app'
+} from '../actionTypes';
+import API_END_POINT from '../../app';
+import browserHistory from '../../history';
 
 export const fetchQuestions = () => {
 	return (dispatch) => {
@@ -69,6 +70,7 @@ export const submitAnswers = (answers, section_number) => {
 					dispatch({
 						type: SHOWVERBAL,
 					})
+					history.push('/feedback');
 				}
 				console.log('submitAnswers success - ', json)
 			})

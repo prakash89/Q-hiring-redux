@@ -25,10 +25,11 @@ class Instaction extends Component {
               <Button
                 label='Next'
                 type='submit'
-					      primary={true}
+                primary={true}
+                href='/questions'
               >
                </Button>
-               <Link to="/instaction">Next</Link>
+              
             </div>
           </div>
         </div>

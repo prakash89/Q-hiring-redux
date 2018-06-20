@@ -69,6 +69,7 @@ class Main extends Component {
               <Route exact path="/login" component={Login} />
               <Route exact path="/instaction" component={Instaction} />
               <Route path="/questions" component={Questions} />
+              <Route path="/feedback" component={Feedback} />
               <Route path="/callback" render={(props) => {
                 handleAuthentication(props);
                 return <Callback {...props} /> 

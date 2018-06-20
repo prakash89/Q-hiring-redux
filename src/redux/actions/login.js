@@ -1,5 +1,6 @@
-import {LOGIN} from '../actionTypes'
-import API_END_POINT from '../../app'
+import {LOGIN} from '../actionTypes';
+import API_END_POINT from '../../app';
+import browserHistory from '../../history';
 
 
 export const login = (params) => {
@@ -21,9 +22,9 @@ export const login = (params) => {
         payload: json
       })
       if (json.user.userRole == "admin") {
-        this.props.history.push('/QuestionsList')
+        history.push('/QuestionsList')
       }else{
-        this.props.history.push('/instaction')
+        history.push('/instaction')
       }
 
     })
