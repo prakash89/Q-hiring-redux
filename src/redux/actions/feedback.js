@@ -1,10 +1,10 @@
-import { FEEDBACK } from '../actionTypes'
-import {ENDPOINT} from '../../app'
+import { FEEDBACK } from '../actionTypes';
+import API_END_POINT from '../../app';
 
 export const feedback = (params) => {
 	return (dispatch) => {
-		const URL = ENDPOINT + 'feedback'
-		fetch(URL, {
+		const URL = `${API_END_POINT}feedback`
+		return fetch(URL, {
 			method: 'POST',
 			body: JSON.stringify(params),
 			headers: {
