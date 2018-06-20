@@ -2,9 +2,16 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Title from 'grommet/components/Title';
 import FormField from 'grommet/components/FormField';
+import Heading from 'grommet/components/Heading';
 import RadioButton from 'grommet/components/RadioButton';
-import {fetchQuestions, submitAnswers} from '../redux/actions/questions';
+import Box from 'grommet/components/Box';
+import {fetchQuestions} from '../redux/actions/questions';
 import Button from 'grommet/components/Button';
+import VERBAL from './question/verbal';
+import LOGICAL from './question/logical';
+import QUANTITATIVE from './question/quantitative';
+
+
 
 class Questions extends Component {
 	constructor(props) {
@@ -13,9 +20,12 @@ class Questions extends Component {
 			checked: null,
 			questions: {
 				logical: [],
-                quantitative: [],
-                verbal: [],
-			}
+        quantitative: [],
+        verbal: [],
+			},
+			showVerbal: props.questions.showVerbal,
+			showLogical: props.questions.showLogical,
+			showQuantitative: props.questions.showQuantitative,
 		}
 	}
 
@@ -23,20 +33,36 @@ class Questions extends Component {
 		this.props.requestQuestions();
 	}
 
-	componentWillReceiveProps(nextProps){
+	componentWillReceiveProps(nextProps) {
 		if (nextProps.questionList !== this.props.questionList) {
-		  this.setState({ questions: nextProps.questionList })
+			this.setState({ questions: nextProps.questionList })
 		}
-	  }
+		if (nextProps.questions.showLogical !== this.props.questions.showLogical) {
+			this.setState({ showLogical: nextProps.questions.showLogical })
+			this.setState({ showVerbal: nextProps.questions.showVerbal })
+		}
+		if (nextProps.questions.showQuantitative !== this.props.questions.showQuantitative) {
+			this.setState({ showQuantitative: nextProps.questions.showQuantitative })
+			this.setState({ showLogical: nextProps.questions.showLogical })
+		}
+	}
 
 
-	handleOptionChange(index, option) {
+	handleOptionChange(index, option, section_type) {
 		let category = this.state.questions;
-        category.verbal[index].user_answer = option
-        this.setState({
+		let category_type = `${category}.${section_type}[${index}].user_answer`;
+		console.log(category_type);
+		if (section_type === 'verbal') {
+			category.verbal[index].user_answer = option;
+		} else if (section_type === 'logical') {
+      category.logical[index].user_answer = option;
+		} else if (section_type === 'quantitative') {
+      category.quantitative[index].user_answer = option;
+		}
+    this.setState({
 			questions: category
-        })
-	  }
+     })
+	}
 
 	  
 	render() {
@@ -44,40 +70,24 @@ class Questions extends Component {
 		let {userAnswers} = this.props;
 		return (
 			<div className="container mb-5">
-			   <div>
-			   <Title truncate={false} pad='small'>
-					Verbal Section 
-				</Title>
-			   {  
-				this.state.questions.verbal.map((item, index) => {
-				let that = this;
-				return (
-					<div className="container mb-5" key={item.id}>
-					   <Title truncate={false} pad='medium'>
-					      {index+1}.{item.title}
-						</Title>
-						{item.options.map(function (option) {
-							return (
-							  <div key={option}>
-								<RadioButton id={option}
-								name={option}
-								label={option}
-								checked={item.user_answer == option}
-								onChange={(e) => that.handleOptionChange(index,option)}
-								 />
-							  </div>
-							);
-						  })}
-				   </div>
-				);
-			  })}
-			   </div>
-			   <div>
-			      <Button label='Submit'
-                     type='submit'
-					 primary={true}
-					 onClick={(e) => userAnswers(this.state.questions.verbal, 1)}/>
-			   </div>
+		  	{ this.state.showVerbal &&
+			  	<VERBAL
+				   verbal={this.state.questions.verbal}
+				   handleOptionChange={this.handleOptionChange.bind(this)}
+			  />
+				}
+				{ this.state.showLogical &&
+					<LOGICAL
+					logical={this.state.questions.logical}
+			  	handleOptionChange={this.handleOptionChange.bind(this)}
+			  />
+				 }
+				{ this.state.showQuantitative &&
+					<QUANTITATIVE
+						quantitative={this.state.questions.quantitative}
+						handleOptionChange={this.handleOptionChange.bind(this)}
+						/>
+				}
 			</div>
 		)
 	}
@@ -86,15 +96,13 @@ class Questions extends Component {
 
 const mapStateToProps = (state) => ({
 	questionList: state.questionsData.items,
+	questions: state.questionsData,
 });
 
 const mapDispatchToProps = (dispatch) => ({
 	requestQuestions() {
 	  dispatch(fetchQuestions());
 	},
-	userAnswers(answers, section_number) {
-		dispatch(submitAnswers(answers, section_number));
-	  },
 });
   
 
