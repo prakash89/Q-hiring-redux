@@ -5,6 +5,7 @@ import { login } from '../redux/actions';
 import { Redirect, HashRouter } from 'react-router-dom';
 import Auth from '../Auth';
 import { Button } from 'grommet';
+import Box from 'grommet/components/Box';
 
 
 class Login extends Component {
@@ -35,7 +36,14 @@ class Login extends Component {
 
   render() {
     return (
-      <div>
+      <Box
+        justify='center'
+        align='center'
+        wrap={true}
+        reverse={false}
+        pad='medium'
+        margin='small'
+      >
         <LoginForm
           title='Login'
           rememberMe={false}
@@ -43,12 +51,12 @@ class Login extends Component {
         <Button
           label='Login through auth0'
           onClick={() => this.authLogin()} />
-      </div>
+      </Box>
     )
   }
 }
 
-const mapStateToProps = ({loginData}) => {
+const mapStateToProps = ({ loginData }) => {
   localStorage.setItem('idToken', loginData.id_token);
   localStorage.setItem('userEmail', loginData.email);
   localStorage.setItem('userId', loginData.user_id);
@@ -57,16 +65,9 @@ const mapStateToProps = ({loginData}) => {
     idToken: loginData.id_token,
     email: loginData.email
   })
-  // let {message,id_token} = loginData
-  // return {message,id_token}
 }
 
-// const mapDispatchToProps(dispatch) => {
-//     return({
-//         loginMe: () => {dispatch(login)}
-//     })
-// }
 
-// export default connect(mapStateToProps,mapDispatchToProps)(Login);
+
 
 export default connect(mapStateToProps, { login })(Login);

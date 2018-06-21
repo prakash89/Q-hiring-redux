@@ -11,7 +11,7 @@ import browserHistory from '../../history';
 export const fetchQuestions = () => {
 	return (dispatch) => {
 		const URL = `${API_END_POINT}questions`;
-		fetch(URL, {
+		return fetch(URL, {
 			method: 'GET',
 			headers: {
 				"Content-Type": "application/json",
@@ -45,7 +45,7 @@ export const submitAnswers = (answers, section_number, resultId) => {
 	console.log('params', params);
 	return (dispatch) => {
 		const URL = `${API_END_POINT}results`;
-		fetch(URL, {
+		return fetch(URL, {
 			method: 'POST',
 			headers: {
 				"Content-Type": "application/json",
@@ -72,7 +72,7 @@ export const submitAnswers = (answers, section_number, resultId) => {
 					dispatch({
 						type: SHOWVERBAL,
 					})
-					history.push('/feedback');
+					browserHistory.push('/feedback');
 				}
 				console.log('submitAnswers success - ', json)
 			})

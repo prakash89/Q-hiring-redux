@@ -20,9 +20,9 @@ export const login = (params) => {
         payload: json
       })
       if (json.user.userRole == "admin") {
-        history.push('/QuestionsList')
+        browserHistory.push('/QuestionsList')
       }else{
-        history.push('/instaction')
+        browserHistory.push('/instaction')
       }
 
     })
