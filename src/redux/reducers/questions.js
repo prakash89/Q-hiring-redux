@@ -4,6 +4,7 @@ import {
 	SHOWLOGICAL,
   SHOWQUANTITATIVE,
   QUESTIONSLIST,
+  LOGOUT,
 } from '../actionTypes'
 
 
@@ -51,6 +52,8 @@ export default (state = INITIAL_STATE, action) => {
         showVerbal: true,
 	      showQuantitative: false,
     };
+    case LOGOUT:
+     return initState;
     default:
       return state;
   }
