@@ -4,12 +4,10 @@ import 'grommet/scss/hpe/index';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-// import { BrowserRouter, Route, Switch,Link, Redirect } from 'react-router-dom';
 import { Router, Route, Link } from 'react-router-dom'
 import App from 'grommet/components/App';
 import Box from 'grommet/components/Box';
 import Header from 'grommet/components/Header';
-// import Footer from 'grommet/components/Footer';
 import Meter from 'grommet/components/Meter';
 import Title from 'grommet/components/Title';
 import Value from 'grommet/components/Value';
@@ -28,8 +26,9 @@ import reducers from './redux/reducers';
 import Auth from './Auth';
 import browserHistory from './history';
 
-const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
-
+const store = createStore(
+  reducers, {}, applyMiddleware(ReduxThunk)
+);
 
 const auth = new Auth();
 
@@ -53,7 +52,7 @@ class Main extends Component {
 
     return (
       <Provider store={store}>
-        <Router history={browserHistory}>
+        <Router onUpdate={() => window.scrollTo(0, 0)} history={browserHistory}>
           <App centered={false}>
             <Header direction="row" justify="between" size="large"
               pad={{ horizontal: 'medium' }}>
@@ -63,13 +62,13 @@ class Main extends Component {
               <Link to="/instaction" >Instructions</Link>
               <Link to="/feedback">Feedback</Link>
               <Link to="/questions">Questions</Link>
-              <Link to="/QuestionsList">List all the questions</Link>
             </Header>
             <Box pad='medium'>
               <Route exact path="/" component={Signup} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/instaction" component={Instaction} />
               <Route path="/questions" component={Questions} />
+              <Route path="/feedback" component={Feedback} />
               <Route path="/callback" render={(props) => {
                 handleAuthentication(props);
                 return <Callback {...props} /> 
