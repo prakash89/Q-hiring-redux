@@ -4,12 +4,10 @@ import 'grommet/scss/hpe/index';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-// import { BrowserRouter, Route, Switch,Link, Redirect } from 'react-router-dom';
 import { Router, Route, Link } from 'react-router-dom'
 import App from 'grommet/components/App';
 import Box from 'grommet/components/Box';
 import Header from 'grommet/components/Header';
-// import Footer from 'grommet/components/Footer';
 import Meter from 'grommet/components/Meter';
 import Title from 'grommet/components/Title';
 import Value from 'grommet/components/Value';
@@ -22,14 +20,14 @@ import QuestionsList from './components/questionsList';
 import Callback from './components/callback';
 import './app.css';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import reducers from './redux/reducers';
 import Auth from './Auth';
 import browserHistory from './history';
 
 const store = createStore(
-  reducers, {}, compose(applyMiddleware(ReduxThunk), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+  reducers, {}, applyMiddleware(ReduxThunk)
 );
 
 const auth = new Auth();
@@ -54,7 +52,7 @@ class Main extends Component {
 
     return (
       <Provider store={store}>
-        <Router history={browserHistory}>
+        <Router onUpdate={() => window.scrollTo(0, 0)} history={browserHistory}>
           <App centered={false}>
             <Header direction="row" justify="between" size="large"
               pad={{ horizontal: 'medium' }}>

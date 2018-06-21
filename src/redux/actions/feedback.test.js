@@ -4,7 +4,8 @@ import * as types from '../actionTypes';
 import * as actions from './feedback';
 import fetchMock from 'fetch-mock';
 const middlewares = [thunk];
-const mockStore = configureMockStore(middlewares)
+const mockStore = configureMockStore(middlewares);
+import API_END_POINT from '../../app';
 
 describe("Feedback action", () => {
   afterEach(() => {
@@ -20,7 +21,7 @@ describe("Feedback action", () => {
     localStorage.setItem("idToken", "testingToken");
     localStorage.setItem("userEmail", "abc@yopmail.com");
 
-    fetchMock.post('http://localhost:3001/feedback', { body: res, headers: { 'content-type': 'application/json' } })
+    fetchMock.post(`${API_END_POINT}feedback`, { body: res, headers: { 'content-type': 'application/json' } })
     const params = {
       email: localStorage.getItem("userEmail"),
       overall: "4",

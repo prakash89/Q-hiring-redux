@@ -12,7 +12,12 @@ describe('questions actions', () => {
     fetchMock.reset()
     fetchMock.restore()
   })
+  beforeAll(() => {
+    const localStorage = require('../localStorage');
+  });
   it('should fetch the questions list', () => {
+    localStorage.setItem("idToken", "testingToken");
+    localStorage.setItem("userEmail", "abc@yopmail.com")
     let response = {
       "message": "successfully fetched all questions",
       "exam": {
@@ -85,9 +90,9 @@ describe('questions actions', () => {
 
     const expectedAction = {
       type: types.QUESTIONS,
-      payload: response
+      questions: response.exam
     }
-    const INITIAL_STATE = {
+    const initialState = {
       message: '',
       items: {
         logical: [],

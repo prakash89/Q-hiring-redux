@@ -9,8 +9,8 @@ class Instructions extends Component {
     super(props)
   }
 
-  render(){
-    return(
+  render() {
+    return (
       <div className="container mb-5">
         <div className="ui raised very padded text container segment ng-scope" id="instruction">
           <h2 className="ui header">Instructions:</h2>
@@ -23,22 +23,21 @@ class Instructions extends Component {
           <div className="ui red segment">Submission on each section - Once answers for a section is submitted you cannot revisit that section.</div>
           <div className="row align-items-center justify-content-center">
             <div className="col-md-8 text-center">
-               <Box
-				      	justify='center'
-				      	align='center'
-				       	wrap={true}
+              <Box
+                justify='center'
+                align='center'
+                wrap={true}
                 reverse={false}
-                    pad='medium'
-                    margin='small'
-                 >
-				 <Button 
-					 label='Next'
-					 type='submit'
-                     accent={true}
-                     href='/questions'
-					/>
-					 </Box>
-              
+                pad='medium'
+                margin='small'
+              >
+                <Button
+                  label='Next'
+                  type='submit'
+                  accent={true}
+                  href='/questions'
+                />
+              </Box>
             </div>
           </div>
         </div>
