@@ -50,9 +50,9 @@ class Questions extends Component {
 
 	handleOptionChange(index, option, section_type) {
 		let category = this.state.questions;
-		let category_type = category[section_type[index]]['user_answer'];
+		// let category_type = category[section_type[index]]['user_answer'];
 		// let category_type = `${category}.${section_type}[${index}].user_answer`;
-		console.log(category_type);
+		// console.log(category_type);
 		if (section_type === 'verbal') {
 			category.verbal[index].user_answer = option;
 		} else if (section_type === 'logical') {

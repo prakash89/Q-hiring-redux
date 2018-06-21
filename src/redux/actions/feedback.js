@@ -19,6 +19,8 @@ export const feedback = (params) => {
 					type: FEEDBACK,
 					payload: json
 				})
+
+				
 			})
 			.catch(error => {
 			})
