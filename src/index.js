@@ -25,6 +25,7 @@ import ReduxThunk from 'redux-thunk';
 import reducers from './redux/reducers';
 import Auth from './Auth';
 import browserHistory from './history';
+import Navbar from './components/navbar.js';
 
 const store = createStore(
   reducers, {}, applyMiddleware(ReduxThunk)
@@ -42,10 +43,6 @@ class Main extends Component {
 
   constructor(props){
     super(props);
-    this.state = {
-      loginRedirectRef: false,
-      signRedirectRef: false
-    }
   }
 
   render() {
@@ -54,16 +51,7 @@ class Main extends Component {
       <Provider store={store}>
         <Router onUpdate={() => window.scrollTo(0, 0)} history={browserHistory}>
           <App centered={false}>
-            <Header direction="row" justify="between" size="large"
-              pad={{ horizontal: 'medium' }}>
-              <Title>Q-Hiring</Title>
-              <Link to="/login" className="padding-left-fix">LogIn</Link>
-              <Link to="/" >SignUp</Link>
-              <Link to="/instaction" >Instructions</Link>
-              <Link to="/feedback">Feedback</Link>
-              <Link to="/questions">Questions</Link>
-              <Link to="/AdminQuestionsList">Admin Dashboard</Link>
-            </Header>
+            <Navbar />
             <Box pad='medium'>
               <Route exact path="/" component={Signup} />
               <Route exact path="/login" component={Login} />

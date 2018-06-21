@@ -43,6 +43,11 @@ export const feedback = (params) => {
 			})
 			.catch(error => {
 				console.log('Error feedback', json)
+				localStorage.clear();
+				browserHistory.push('/login');
+						dispatch({
+							type: LOGOUT,
+						})
 			})
 	}
 
