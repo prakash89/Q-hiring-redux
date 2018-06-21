@@ -1,5 +1,11 @@
-import {QUESTIONS} from '../actionTypes'
-import { QUESTIONSLIST } from "../actionTypes";
+import { 
+	QUESTIONS,
+	SHOWVERBAL,
+	SHOWLOGICAL,
+  SHOWQUANTITATIVE,
+  QUESTIONSLIST,
+  LOGOUT,
+} from '../actionTypes'
 
 
 const INITIAL_STATE = {
@@ -7,9 +13,13 @@ const INITIAL_STATE = {
   items: {
     logical: [],
     quantitative: [],
-    verbal: [],
+    verbal: []
   },
-  questions: []
+  questions: [],
+  showVerbal: true,
+	showLogical: false,
+  showQuantitative: false,
+  resultId: null,
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -19,9 +29,33 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         items: action.questions,
       };
-      case QUESTIONSLIST:
+    case QUESTIONSLIST:
       let questions  = action.payload;
-      return { ...state, questions }
+      return { 
+        ...state, 
+        questions 
+      };
+    case SHOWLOGICAL:
+      return { 
+        ...state, 
+        showVerbal: false,
+        showLogical: true,
+        resultId: action.resultId,
+      };
+    case SHOWQUANTITATIVE:
+      return { 
+        ...state, 
+        showLogical: false,
+	      showQuantitative: true,
+      };
+    case SHOWVERBAL:
+      return { 
+        ...state, 
+        showVerbal: true,
+	      showQuantitative: false,
+    };
+    case LOGOUT:
+     return initState;
     default:
       return state;
   }

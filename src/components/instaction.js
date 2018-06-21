@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import '../css/instaction.css';
+import { Button } from 'grommet';
+import { Link } from 'react-router-dom'
+import Box from 'grommet/components/Box';
 
-class Instaction extends Component {
+class Instructions extends Component {
   constructor(props) {
     super(props)
   }
@@ -20,7 +23,22 @@ class Instaction extends Component {
           <div className="ui red segment">Submission on each section - Once answers for a section is submitted you cannot revisit that section.</div>
           <div className="row align-items-center justify-content-center">
             <div className="col-md-8 text-center">
-              <button mat-raised-button color="primary" routerLink="/questions" type="submit">Next</button>
+               <Box
+				      	justify='center'
+				      	align='center'
+				       	wrap={true}
+                reverse={false}
+                    pad='medium'
+                    margin='small'
+                 >
+				 <Button 
+					 label='Next'
+					 type='submit'
+                     accent={true}
+                     href='/questions'
+					/>
+					 </Box>
+              
             </div>
           </div>
         </div>
@@ -29,4 +47,4 @@ class Instaction extends Component {
   }
 }
 
-export default (Instaction);
+export default Instructions;

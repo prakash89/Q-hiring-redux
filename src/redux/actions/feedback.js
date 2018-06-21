@@ -1,9 +1,9 @@
-import { FEEDBACK } from '../actionTypes'
-import {ENDPOINT} from '../../app'
+import { FEEDBACK, LOGOUT } from '../actionTypes'
+import API_END_POINT from '../../app'
 
 export const feedback = (params) => {
 	return (dispatch) => {
-		const URL = ENDPOINT + 'feedback'
+		const URL = `${API_END_POINT}feedback`;
 		fetch(URL, {
 			method: 'POST',
 			body: JSON.stringify(params),
@@ -19,8 +19,25 @@ export const feedback = (params) => {
 					type: FEEDBACK,
 					payload: json
 				})
+				const LOGOUT = `${API_END_POINT}logout`;
+				fetch(LOGOUT, {
+					method: 'DELETE',
+					headers: {
+						"Content-Type": "application/json",
+						"Authorization": localStorage.getItem('idToken'),
+						"email": localStorage.getItem('userEmail')
+					}
+				})
+					.then(response => response.json())
+					.then(response => {
+						localStorage.clear();
+						dispatch({
+							type: LOGOUT,
+						})
+					})
 			})
 			.catch(error => {
 			})
 	}
+
 }

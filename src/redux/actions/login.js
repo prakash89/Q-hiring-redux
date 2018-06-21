@@ -1,18 +1,17 @@
-import {LOGIN} from '../actionTypes'
-import API_END_POINT from '../../app'
+import {LOGIN} from '../actionTypes';
+import API_END_POINT from '../../app';
+import browserHistory from '../../history';
 
 
 export const login = (params) => {
   return (dispatch) => {
     const URL = `${API_END_POINT}login`;
-    console.log(params);
-    fetch(URL, {
+    return fetch(URL, {
       method: 'POST',
       body: JSON.stringify(params),
     })
     .then(response => response.json())
     .then(json => {
-      console.log(`json data: ${JSON.stringify(json)}`)
       localStorage.setItem('idToken', json.session.authToken);
       localStorage.setItem('userEmail', json.user.email);
       localStorage.setItem('userRole', json.user.userRole);
@@ -21,9 +20,9 @@ export const login = (params) => {
         payload: json
       })
       if (json.user.userRole == "admin") {
-        this.props.history.push('/QuestionsList')
+        history.push('/QuestionsList')
       }else{
-        this.props.history.push('/instaction')
+        history.push('/instaction')
       }
 
     })

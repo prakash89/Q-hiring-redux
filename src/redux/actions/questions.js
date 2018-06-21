@@ -1,6 +1,12 @@
-import { QUESTIONS } from '../actionTypes'
-import API_END_POINT from '../../app'
-import { QUESTIONSLIST } from "../actionTypes";
+import { 
+	QUESTIONS,
+	SHOWVERBAL,
+	SHOWLOGICAL,
+	SHOWQUANTITATIVE,
+	QUESTIONSLIST,
+} from '../actionTypes';
+import API_END_POINT from '../../app';
+import browserHistory from '../../history';
 
 export const fetchQuestions = () => {
 	return (dispatch) => {
@@ -27,14 +33,16 @@ export const fetchQuestions = () => {
 	}
 }
 
-export const submitAnswers = (answers, section_number) => {
+export const submitAnswers = (answers, section_number, resultId) => {
 	var params = {
       exam: {
 		   section_number: section_number,
 		   answers: answers,
-		   user_id: localStorage.getItem('userId'),
+			 user_id: localStorage.getItem('userId'),
+			 resultId: resultId,
 	    }
 	};
+	console.log('params', params);
 	return (dispatch) => {
 		const URL = `${API_END_POINT}results`;
 		fetch(URL, {
@@ -48,6 +56,24 @@ export const submitAnswers = (answers, section_number) => {
 		})
 			.then(response => response.json())
 			.then(json => {
+				if (section_number === 1) {
+					console.log(section_number)
+					dispatch({
+						type: SHOWLOGICAL,
+						resultId: json.resultId
+					})
+				}
+				if (section_number === 2) {
+					dispatch({
+						type: SHOWQUANTITATIVE,
+					})
+				}
+				if (section_number === 3) {
+					dispatch({
+						type: SHOWVERBAL,
+					})
+					history.push('/feedback');
+				}
 				console.log('submitAnswers success - ', json)
 			})
 			.catch(error => {
