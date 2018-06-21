@@ -111,12 +111,6 @@ class Feedback extends Component {
   }
 }
 
-// const mapStateToProps = ({ feedbackData }) => {
-//   return ({
-//     message: feedbackData.message
-//   })
-// }
-
 const mapStateToProps = (state) => ({
   resultId: state.questionsData.resultId,
 });
