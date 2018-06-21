@@ -22,14 +22,15 @@ import QuestionsList from './components/questionsList';
 import Callback from './components/callback';
 import './app.css';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import reducers from './redux/reducers';
 import Auth from './Auth';
 import browserHistory from './history';
 
-const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
-
+const store = createStore(
+  reducers, {}, compose(applyMiddleware(ReduxThunk), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+);
 
 const auth = new Auth();
 
@@ -69,6 +70,7 @@ class Main extends Component {
               <Route exact path="/login" component={Login} />
               <Route exact path="/instaction" component={Instaction} />
               <Route path="/questions" component={Questions} />
+              <Route path="/feedback" component={Feedback} />
               <Route path="/callback" render={(props) => {
                 handleAuthentication(props);
                 return <Callback {...props} /> 

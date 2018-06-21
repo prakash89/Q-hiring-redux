@@ -4,8 +4,9 @@ import * as types from '../actionTypes';
 import * as actions from './login';
 import fetchMock from 'fetch-mock';
 const middlewares = [thunk];
-const mockStore = configureMockStore(middlewares)
-
+const mockStore = configureMockStore(middlewares);
+import API_END_POINT from '../../app';
+ 
 describe('login actions', () => {
   afterEach(() => {
     fetchMock.reset()
@@ -17,9 +18,8 @@ describe('login actions', () => {
   });
 
   it('should create an action to create session', () => {
-    let res = {message: 'success', session:{authToken: '1234' }, user: { email: 'abc@yopmail.com', userRole: 'user'} }
-    fetchMock.post('http://localhost:3001/login', { body: res, headers: { 'content-type': 'application/json' } })
-
+    let res = {message: 'success', session:{authToken: '1234'}}
+    fetchMock.post(`${API_END_POINT}login`, { body: res, headers: { 'content-type': 'application/json' } })
     const params = {'email': 'abc@yopmail.com', 'password': 'Qwinix123'}
     const expectedAction = {
       type: types.LOGIN,

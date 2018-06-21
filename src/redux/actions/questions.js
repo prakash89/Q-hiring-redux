@@ -4,8 +4,9 @@ import {
 	SHOWLOGICAL,
 	SHOWQUANTITATIVE,
 	QUESTIONSLIST,
-} from '../actionTypes'
-import API_END_POINT from '../../app'
+} from '../actionTypes';
+import API_END_POINT from '../../app';
+import browserHistory from '../../history';
 
 export const fetchQuestions = () => {
 	return (dispatch) => {
@@ -32,12 +33,13 @@ export const fetchQuestions = () => {
 	}
 }
 
-export const submitAnswers = (answers, section_number) => {
+export const submitAnswers = (answers, section_number, resultId) => {
 	var params = {
       exam: {
 		   section_number: section_number,
 		   answers: answers,
-		   user_id: localStorage.getItem('userId'),
+			 user_id: localStorage.getItem('userId'),
+			 resultId: resultId,
 	    }
 	};
 	console.log('params', params);
@@ -58,6 +60,7 @@ export const submitAnswers = (answers, section_number) => {
 					console.log(section_number)
 					dispatch({
 						type: SHOWLOGICAL,
+						resultId: json.resultId
 					})
 				}
 				if (section_number === 2) {
@@ -69,6 +72,7 @@ export const submitAnswers = (answers, section_number) => {
 					dispatch({
 						type: SHOWVERBAL,
 					})
+					history.push('/feedback');
 				}
 				console.log('submitAnswers success - ', json)
 			})
