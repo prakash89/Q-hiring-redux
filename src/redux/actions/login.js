@@ -6,14 +6,12 @@ import browserHistory from '../../history';
 export const login = (params) => {
   return (dispatch) => {
     const URL = `${API_END_POINT}login`;
-    console.log(params);
-    fetch(URL, {
+    return fetch(URL, {
       method: 'POST',
       body: JSON.stringify(params),
     })
     .then(response => response.json())
     .then(json => {
-      console.log(`json data: ${JSON.stringify(json)}`)
       localStorage.setItem('idToken', json.session.authToken);
       localStorage.setItem('userEmail', json.user.email);
       localStorage.setItem('userRole', json.user.userRole);

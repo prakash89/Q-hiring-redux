@@ -11,7 +11,7 @@ import Button from 'grommet/components/Button';
 class Logical extends Component {
 
   render() {
-    let { logical, handleOptionChange, userAnswers } = this.props;
+    let { logical, handleOptionChange, userAnswers, resultId } = this.props;
     return (
       <div className="container mb-5">
         <div>
@@ -79,7 +79,7 @@ class Logical extends Component {
                 label='Next'
                 type='submit'
                 accent={true}
-                onClick={(e) => userAnswers(logical, 2)} />
+                onClick={(e) => userAnswers(logical, 2, resultId)} />
             </Box>
           </div>
         </div>
@@ -88,11 +88,15 @@ class Logical extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({});
+
+const mapStateToProps = (state) => ({
+  resultId: state.questionsData.resultId,
+});
+
 
 const mapDispatchToProps = (dispatch) => ({
-  userAnswers(answers, section_number) {
-    dispatch(submitAnswers(answers, section_number));
+  userAnswers(answers, section_number, resultId) {
+    dispatch(submitAnswers(answers, section_number, resultId));
   },
 });
 

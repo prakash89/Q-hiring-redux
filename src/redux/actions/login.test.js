@@ -12,10 +12,14 @@ describe('login actions', () => {
     fetchMock.reset()
     fetchMock.restore()
   })
+
+  beforeAll(() => {
+    const localStorage = require('../localStorage') ;
+  });
+
   it('should create an action to create session', () => {
     let res = {message: 'success', session:{authToken: '1234'}}
     fetchMock.post(`${API_END_POINT}login`, { body: res, headers: { 'content-type': 'application/json' } })
-
     const params = {'email': 'abc@yopmail.com', 'password': 'Qwinix123'}
     const expectedAction = {
       type: types.LOGIN,

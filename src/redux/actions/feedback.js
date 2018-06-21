@@ -4,7 +4,7 @@ import API_END_POINT from '../../app'
 export const feedback = (params) => {
 	return (dispatch) => {
 		const URL = `${API_END_POINT}feedback`;
-		fetch(URL, { 
+		fetch(URL, {
 			method: 'POST',
 			body: JSON.stringify(params),
 			headers: {
@@ -20,7 +20,7 @@ export const feedback = (params) => {
 					payload: json
 				})
 				const LOGOUT = `${API_END_POINT}logout`;
-				fetch(LOGOUT, { 
+				fetch(LOGOUT, {
 					method: 'DELETE',
 					headers: {
 						"Content-Type": "application/json",
@@ -28,15 +28,16 @@ export const feedback = (params) => {
 						"email": localStorage.getItem('userEmail')
 					}
 				})
-				.then(response => response.json())
-				.then(response => {
-					localStorage.clear();
-					dispatch({
-						type: LOGOUT,
+					.then(response => response.json())
+					.then(response => {
+						localStorage.clear();
+						dispatch({
+							type: LOGOUT,
+						})
 					})
-				  })
 			})
 			.catch(error => {
 			})
 	}
+
 }
