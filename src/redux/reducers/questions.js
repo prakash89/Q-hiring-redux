@@ -1,4 +1,4 @@
-import { 
+import {
 	QUESTIONS,
 	SHOWVERBAL,
 	SHOWLOGICAL,
@@ -20,6 +20,7 @@ const INITIAL_STATE = {
 	showLogical: false,
   showQuantitative: false,
   resultId: null,
+  questionsList: [],
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -30,27 +31,26 @@ export default (state = INITIAL_STATE, action) => {
         items: action.questions,
       };
     case QUESTIONSLIST:
-      let questions  = action.payload;
-      return { 
-        ...state, 
-        questions 
+      return {
+        ...state,
+        questionsList: action.payload,
       };
     case SHOWLOGICAL:
-      return { 
-        ...state, 
+      return {
+        ...state,
         showVerbal: false,
         showLogical: true,
         resultId: action.resultId,
       };
     case SHOWQUANTITATIVE:
-      return { 
-        ...state, 
+      return {
+        ...state,
         showLogical: false,
 	      showQuantitative: true,
       };
     case SHOWVERBAL:
-      return { 
-        ...state, 
+      return {
+        ...state,
         showVerbal: true,
 	      showQuantitative: false,
     };

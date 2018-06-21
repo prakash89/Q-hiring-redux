@@ -1,4 +1,4 @@
-import { 
+import {
 	QUESTIONS,
 	SHOWVERBAL,
 	SHOWLOGICAL,
@@ -83,7 +83,7 @@ export const submitAnswers = (answers, section_number, resultId) => {
 }
 
 
-export const questionsList = (params) => {
+export const questionsAdmin = (params) => {
   return (dispatch) => {
 		const URL = `${API_END_POINT}allQuestions`;
     fetch(URL, {

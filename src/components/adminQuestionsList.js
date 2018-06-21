@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Table from 'grommet/components/Table';
 import TableRow from 'grommet/components/TableRow';
-import { questionsList } from "../redux/actions";
+import { questionsAdmin } from "../redux/actions";
 import Article from 'grommet/components/Article';
 import Button from 'grommet/components/Button';
 import { Layer, Box, Split } from 'grommet';
@@ -10,7 +10,7 @@ import AddQuestionsModal from './addQuestionsModal';
 
 import '../css/questionsList.css';
 
-class QuestionsList extends Component {
+class AdminQuestionsList extends Component {
 
   constructor(props) {
     super(props);
@@ -19,12 +19,8 @@ class QuestionsList extends Component {
     }
   }
 
-  onclose(){
-
-  }
-
   componentDidMount() {
-    this.props.questionsList();
+    this.props.questionsAdmin();
   }
 
   showAddQuestionModal() {
@@ -32,8 +28,8 @@ class QuestionsList extends Component {
   }
 
   renderQuestionRows() {
-    if (this.props.questions.length > 0) {
-      return this.props.questions.map((question, index) =>
+    if (this.props.questionsList.length > 0) {
+      return this.props.questionsList.map((question, index) =>
         <TableRow key={question.id}>
           <td>
             {index + 1}
@@ -66,6 +62,8 @@ class QuestionsList extends Component {
   }
 
   render() {
+    const { questionsList } = this.props;
+    console.log(questionsList)
     return (
       <div>
         <Split fixed={false}>
@@ -110,7 +108,7 @@ class QuestionsList extends Component {
           {this.state.showAddQuestionLayer &&
             <Layer
               closer={true}
-            onClose={() =>this.onclose()}>
+            >
               <AddQuestionsModal />
             </Layer>}
         </Article>
@@ -123,10 +121,10 @@ class QuestionsList extends Component {
 
 const mapStateToProps = (state) => {
   return ({
-    questions: state.questionsList.questions
+    questionsList: state.questionsData.questionsList
   })
 }
 
 
 
-export default connect(mapStateToProps, { questionsList })(QuestionsList);
+export default connect(mapStateToProps, { questionsAdmin })(AdminQuestionsList);

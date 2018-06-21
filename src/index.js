@@ -16,7 +16,7 @@ import Signup from './components/signup';
 import Feedback from './components/feedback';
 import Questions from './components/questions';
 import Instaction from './components/instaction';
-import QuestionsList from './components/questionsList';
+import AdminQuestionsList from './components/adminQuestionsList';
 import Callback from './components/callback';
 import './app.css';
 import { Provider } from 'react-redux';
@@ -62,6 +62,7 @@ class Main extends Component {
               <Link to="/instaction" >Instructions</Link>
               <Link to="/feedback">Feedback</Link>
               <Link to="/questions">Questions</Link>
+              <Link to="/AdminQuestionsList">Admin Dashboard</Link>
             </Header>
             <Box pad='medium'>
               <Route exact path="/" component={Signup} />
@@ -69,10 +70,11 @@ class Main extends Component {
               <Route exact path="/instaction" component={Instaction} />
               <Route path="/questions" component={Questions} />
               <Route path="/feedback" component={Feedback} />
+              <Route path="/AdminQuestionsList" component={AdminQuestionsList} />
               <Route path="/callback" render={(props) => {
                 handleAuthentication(props);
-                return <Callback {...props} /> 
-                }}/> 
+                return <Callback {...props} />
+                }}/>
             </Box>
           </App>
         </Router>
