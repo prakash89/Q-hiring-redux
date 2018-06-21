@@ -107,32 +107,32 @@ class Signup extends Component {
         break;
       case 'fname':
         firstNameValid = value.length >= 4;
-        fieldValidationErrors.fname = firstNameValid ? '': ' is too short';
+        fieldValidationErrors.fname = firstNameValid ? '': 'Please enter more than 3 chanracters';
         break;
       case 'lname':
         lastNameValid = value.length >= 4;
-        fieldValidationErrors.lname = lastNameValid ? '': ' is too short';
+        fieldValidationErrors.lname = lastNameValid ? '': ' Please enter more than 3 chanracters';
         break;
       case 'password':
         passwordValue = value;
         passwordValid = value.length >= 6;
-        fieldValidationErrors.password = passwordValid ? '': ' is too short';
+        fieldValidationErrors.password = passwordValid ? '': ' Please enter more than 3 chanracters';
         break;
       case 'passwordconfirmation':
         confirmPasswordValid = (this.state.password == value);
-        fieldValidationErrors.passwordconfirmation = confirmPasswordValid ? '': 'not match';
+        fieldValidationErrors.passwordconfirmation = confirmPasswordValid ? '': 'password and password confirmation is not match';
         break;
       case 'collage':
         collageValid = value.length >= 4;
-        fieldValidationErrors.collage = collageValid ? '': ' is too short';
+        fieldValidationErrors.collage = collageValid ? '': '  Please enter more than 3 chanracters';
         break;
       case 'passing':
         passingValid = value.length >= 4;
-        fieldValidationErrors.passing = passingValid ? '': ' is too short';
+        fieldValidationErrors.passing = passingValid ? '': '  Please enter more than 3 chanracters';
         break;
       case 'batch':
         batchValid = value.length >= 3;
-        fieldValidationErrors.batch = batchValid ? '': ' is too short';
+        fieldValidationErrors.batch = batchValid ? '': '  Please enter more than 2 chanracters';
         break;
       default:
         break;
