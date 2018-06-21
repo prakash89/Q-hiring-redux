@@ -33,12 +33,13 @@ export const fetchQuestions = () => {
 	}
 }
 
-export const submitAnswers = (answers, section_number) => {
+export const submitAnswers = (answers, section_number, resultId) => {
 	var params = {
       exam: {
 		   section_number: section_number,
 		   answers: answers,
-		   user_id: localStorage.getItem('userId'),
+			 user_id: localStorage.getItem('userId'),
+			 resultId: resultId,
 	    }
 	};
 	console.log('params', params);
@@ -59,6 +60,7 @@ export const submitAnswers = (answers, section_number) => {
 					console.log(section_number)
 					dispatch({
 						type: SHOWLOGICAL,
+						resultId: json.resultId
 					})
 				}
 				if (section_number === 2) {

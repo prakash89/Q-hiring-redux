@@ -12,12 +12,13 @@ const INITIAL_STATE = {
   items: {
     logical: [],
     quantitative: [],
-    verbal: [],
+    verbal: []
   },
   questions: [],
   showVerbal: true,
 	showLogical: false,
-	showQuantitative: false,
+  showQuantitative: false,
+  resultId: null,
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -37,7 +38,8 @@ export default (state = INITIAL_STATE, action) => {
       return { 
         ...state, 
         showVerbal: false,
-	      showLogical: true,
+        showLogical: true,
+        resultId: action.resultId,
       };
     case SHOWQUANTITATIVE:
       return { 
