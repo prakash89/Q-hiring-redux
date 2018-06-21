@@ -11,8 +11,13 @@ describe('login actions', () => {
     fetchMock.reset()
     fetchMock.restore()
   })
+
+  beforeAll(() => {
+    const localStorage = require('../localStorage') ;
+  });
+
   it('should create an action to create session', () => {
-    let res = {message: 'success', session:{authToken: '1234'}}
+    let res = {message: 'success', session:{authToken: '1234' }, user: { email: 'abc@yopmail.com', userRole: 'user'} }
     fetchMock.post('http://localhost:3001/login', { body: res, headers: { 'content-type': 'application/json' } })
 
     const params = {'email': 'abc@yopmail.com', 'password': 'Qwinix123'}
