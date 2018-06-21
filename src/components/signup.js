@@ -13,7 +13,6 @@ import '../app.css';
 import '../css/signup.css';
 import Toast from 'grommet/components/Toast';
 import { formError } from '../formError';
-import Box from 'grommet/components/Box';
 
 class Signup extends Component {
   constructor(props) {
@@ -108,32 +107,32 @@ class Signup extends Component {
         break;
       case 'fname':
         firstNameValid = value.length >= 4;
-        fieldValidationErrors.fname = firstNameValid ? '' : ' is too short';
+        fieldValidationErrors.fname = firstNameValid ? '' : 'Please enter more than 3 chanracters';
         break;
       case 'lname':
         lastNameValid = value.length >= 4;
-        fieldValidationErrors.lname = lastNameValid ? '' : ' is too short';
+        fieldValidationErrors.lname = lastNameValid ? '' : ' Please enter more than 3 chanracters';
         break;
       case 'password':
         passwordValue = value;
         passwordValid = value.length >= 6;
-        fieldValidationErrors.password = passwordValid ? '' : ' is too short';
+        fieldValidationErrors.password = passwordValid ? '' : ' Please enter more than 3 chanracters';
         break;
       case 'passwordconfirmation':
         confirmPasswordValid = (this.state.password == value);
-        fieldValidationErrors.passwordconfirmation = confirmPasswordValid ? '' : 'not match';
+        fieldValidationErrors.passwordconfirmation = confirmPasswordValid ? '' : 'password and password confirmation is not match';
         break;
       case 'collage':
         collageValid = value.length >= 4;
-        fieldValidationErrors.collage = collageValid ? '' : ' is too short';
+        fieldValidationErrors.collage = collageValid ? '' : '  Please enter more than 3 chanracters';
         break;
       case 'passing':
         passingValid = value.length >= 4;
-        fieldValidationErrors.passing = passingValid ? '' : ' is too short';
+        fieldValidationErrors.passing = passingValid ? '' : '  Please enter more than 3 chanracters';
         break;
       case 'batch':
         batchValid = value.length >= 3;
-        fieldValidationErrors.batch = batchValid ? '' : ' is too short';
+        fieldValidationErrors.batch = batchValid ? '' : '  Please enter more than 2 chanracters';
         break;
       default:
         break;
@@ -150,14 +149,7 @@ class Signup extends Component {
 
   render() {
     return (
-      <Box
-        justify='center'
-        align='center'
-        wrap={true}
-        reverse={false}
-        pad='medium'
-        margin='small'
-      >
+      <div>
         {((this.state.formValid == false) && this.state.isSubmit) ? (<Toast status='critical'>
           Invalid Forms.
       </Toast>) : null}
@@ -165,7 +157,7 @@ class Signup extends Component {
           <Header>
             <Heading className="text-align-center">
               SignUp
-             </Heading>
+          </Heading>
           </Header>
           <FormField label='First Name' error={this.state.formErrors['fname']}>
             <TextInput name="fname" value={this.state.fname} onDOMChange={(e) => this.onFiledChange(e)} onKeyUp={(e) => this.handleUserInput(e)} required />
@@ -207,7 +199,7 @@ class Signup extends Component {
               primary={true} />
           </Footer>
         </Form>
-      </Box>
+      </div>
     )
   }
 }
