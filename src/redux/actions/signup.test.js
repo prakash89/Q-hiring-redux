@@ -4,9 +4,10 @@ import * as types from '../actionTypes';
 import * as actions from './signup';
 import fetchMock from 'fetch-mock';
 const middlewares = [thunk];
-const mockStore = configureMockStore(middlewares)
+const mockStore = configureMockStore(middlewares);
+import API_END_POINT from '../../app';
 
-describe("signuu action", () => {
+describe("signuup action", () => {
     afterEach(() => {
         fetchMock.reset()
         fetchMock.restore() 
@@ -14,7 +15,7 @@ describe("signuu action", () => {
 
     it("should create action for signup", () => {
         let res = { message: "signup done", session: {authToken: "123"}, user: {email: "abc@yopmail.com"}}
-        fetchMock.post('http://localhost:3001/register', { body: res, headers: { 'content-type': 'application/json' }})
+        fetchMock.post(`${API_END_POINT}register`, { body: res, headers: { 'content-type': 'application/json' }})
         const params = {
             firstname: "prakash",
             lastname: "sl",

@@ -1,4 +1,4 @@
-import {LOGIN} from '../actionTypes'
+import {LOGIN, LOGOUT} from '../actionTypes'
 
 const INITIAL_STATE = {
   message: '',
@@ -15,6 +15,8 @@ export default (state = INITIAL_STATE, action) => {
       let email = action.payload.user.email
       let user_id = action.payload.user.id
       return {...state, message, id_token, email, user_id};
+    case LOGOUT:
+      return initState;
     default:
       return state;
   }
