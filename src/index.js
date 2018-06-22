@@ -54,14 +54,14 @@ class Main extends Component {
       <Provider store={store}>
         <Router onUpdate={() => window.scrollTo(0, 0)} history={browserHistory}>
           <App centered={false}>
-            <Header direction="row" justify="between" size="large"
+            <Header direction="row"  size="large"
               pad={{ horizontal: 'medium' }}>
               <Title>Q-Hiring</Title>
-              <Link to="/login" className="padding-left-fix">LogIn</Link>
-              <Link to="/" >SignUp</Link>
-              <Link to="/instaction" >Instructions</Link>
-              <Link to="/feedback">Feedback</Link>
-              <Link to="/questions">Questions</Link>
+              <Title> <Link to="/login" className="padding-left-fix">LogIn {'  '}</Link></Title>
+              <Title>   <Link to="/" >SignUp</Link></Title>
+              
+             
+            
             </Header>
             <Box pad='medium'>
               <Route exact path="/" component={Signup} />

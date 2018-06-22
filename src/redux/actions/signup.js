@@ -1,5 +1,6 @@
-import {SIGNUP} from '../actionTypes'
-import API_END_POINT from '../../app'
+import {SIGNUP} from '../actionTypes';
+import API_END_POINT from '../../app';
+import browserHistory from '../../history';
 
 export const signup = (params) => {
   return(dispatch) => {
@@ -14,6 +15,12 @@ export const signup = (params) => {
         type: SIGNUP,
         payload: json
       })
+      if (json.user.userRole == "admin") {
+        browserHistory.push('/QuestionsList')
+      }else{
+        browserHistory.push('/instaction')
+      }
+
     })
     .catch(error => {
     })
