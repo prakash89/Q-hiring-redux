@@ -1,12 +1,13 @@
 import auth0 from 'auth0-js';
 import browserHistory from './history';
+import API_END_POINT from './app';
 
 export default class Auth {
 
   constructor() {
     // super();
     this.handleAuthentication = this.handleAuthentication.bind(this);
-    this.auth0 = new auth0.WebAuth({ domain: 'qwinix-saml.auth0.com', clientID: '4KKmrFNDdTws8aPidkIBf63qOIclDqMB', redirectUri: 'http://localhost:8080/callback', audience: 'http://localhost:3001', responseType: 'code token id_token', scope: "openid profile" });
+    this.auth0 = new auth0.WebAuth({ domain: 'qwinix-saml.auth0.com', clientID: '4KKmrFNDdTws8aPidkIBf63qOIclDqMB', redirectUri: `${API_END_POINT}callback`, audience: `${API_END_POINT}`, responseType: 'code token id_token', scope: "openid profile" });
   }
 
 
