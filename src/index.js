@@ -4,7 +4,7 @@ import 'grommet/scss/hpe/index';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-import { Router, Route, Link } from 'react-router-dom'
+import { Router, Route, Link, Switch, BrowserRouter } from 'react-router-dom';
 import App from 'grommet/components/App';
 import Box from 'grommet/components/Box';
 import Header from 'grommet/components/Header';
@@ -52,18 +52,20 @@ class Main extends Component {
 
     return (
       <Provider store={store}>
-        <Router onUpdate={() => window.scrollTo(0, 0)} history={browserHistory}>
+        <BrowserRouter>
           <App centered={false}>
             <Header direction="row"  size="large"
               pad={{ horizontal: 'medium' }}>
               <Title>Q-Hiring</Title>
               <Title> <Link to="/login" className="padding-left-fix">LogIn {'  '}</Link></Title>
               <Title>   <Link to="/" >SignUp</Link></Title>
+              <Title><Link to="/questions" >Questions</Link></Title>
               
              
             
             </Header>
             <Box pad='medium'>
+            <Switch>
               <Route exact path="/" component={Signup} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/instaction" component={Instaction} />
@@ -73,9 +75,10 @@ class Main extends Component {
                 handleAuthentication(props);
                 return <Callback {...props} /> 
                 }}/> 
+            </Switch>
             </Box>
           </App>
-        </Router>
+        </BrowserRouter>
       </Provider>
     );
   }
