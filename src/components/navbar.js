@@ -10,9 +10,6 @@ class Navbar extends Component {
   }
 
   render(){
-  	console.log("+++++++++++++++++++++++")
-  	console.log(this.props)
-  	console.log("+++++++++++++++++++++++")
 
   	return(
   		<Header direction="row" justify="between" size="large"

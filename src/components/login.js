@@ -57,8 +57,6 @@ class Login extends Component {
 }
 
 const mapStateToProps = ({ loginData }) => {
-  console.log("____________________")
-  console.log(loginData)
  return ({
     message: loginData.message,
     idToken: loginData.id_token,

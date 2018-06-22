@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Table from 'grommet/components/Table';
 import TableRow from 'grommet/components/TableRow';
-import { questionsAdmin, disableTostMessage } from "../redux/actions";
+import { questionsAdmin } from "../redux/actions";
 import Article from 'grommet/components/Article';
 import Button from 'grommet/components/Button';
 import { Layer, Box, Split, Toast } from 'grommet';
@@ -126,9 +126,6 @@ class AdminQuestionsList extends Component {
 
 
 const mapStateToProps = (state) => {
-  console.log("00000000000000000000000")
-  console.log(state)
-  console.log("00000000000000000000000")
   return ({
     questionsList: state.questionsData.questionsList,
     message: state.questionsData.message
@@ -137,4 +134,4 @@ const mapStateToProps = (state) => {
 
 
 
-export default connect(mapStateToProps, { questionsAdmin, disableTostMessage })(AdminQuestionsList);
+export default connect(mapStateToProps, { questionsAdmin })(AdminQuestionsList);
