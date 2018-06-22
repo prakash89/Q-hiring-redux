@@ -13,7 +13,7 @@ class Login extends Component {
   }
 
   authLogin() {
-    console.log("Inside the authLogiin button click")
+    console.log("Inside the authLogin button click")
     const auth = new Auth();
     auth.login();
   }
@@ -29,7 +29,7 @@ class Login extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.message == "You have successfully signed up.") {
-      this.props.history.push('/instaction')
+      this.props.history.push('/instruction')
     }
   }
 

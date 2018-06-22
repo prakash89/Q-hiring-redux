@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
-import '../css/instaction.css';
+import '../css/instruction.css';
 
-class Instaction extends Component {
+class Instruction extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      instruction: {}
+    }
   }
 
+  componentDidMount() {
+    this.props.requestInstructions();
+  }
+  
   render(){
     return(
       <div className="container mb-5">
@@ -29,4 +36,10 @@ class Instaction extends Component {
   }
 }
 
-export default (Instaction);
+const mapDispatchToProps = (dispatch) => ({
+  requestInstructions() {
+    dispatch(fetchInstructions());
+  }
+});
+
+export default (Instruction);

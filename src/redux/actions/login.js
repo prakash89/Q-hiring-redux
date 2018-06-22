@@ -22,10 +22,9 @@ export const login = (params) => {
       })
       if (json.user.userRole == "admin") {
         this.props.history.push('/QuestionsList')
-      }else{
-        this.props.history.push('/instaction')
+      } else {
+        this.props.history.push('/instruction')
       }
-
     })
     .catch( error => {
       console.log("error",error);

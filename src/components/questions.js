@@ -13,8 +13,8 @@ class Questions extends Component {
 			checked: null,
 			questions: {
 				logical: [],
-                quantitative: [],
-                verbal: [],
+        quantitative: [],
+        verbal: [],
 			}
 		}
 	}

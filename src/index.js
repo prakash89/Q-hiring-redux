@@ -17,18 +17,25 @@ import Login from './components/login';
 import Signup from './components/signup';
 import Feedback from './components/feedback';
 import Questions from './components/questions';
-import Instaction from './components/instaction';
+import Instruction from './components/instruction';
 import QuestionsList from './components/questionsList';
 import Callback from './components/callback';
 import './app.css';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import reducers from './redux/reducers';
 import Auth from './Auth';
 import browserHistory from './history';
 
-const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
+const store = createStore(
+  reducers, 
+  {}, 
+  compose(
+    applyMiddleware(ReduxThunk),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  )
+);
 
 
 const auth = new Auth();
@@ -60,7 +67,7 @@ class Main extends Component {
               <Title>Q-Hiring</Title>
               <Link to="/login" className="padding-left-fix">LogIn</Link>
               <Link to="/" >SignUp</Link>
-              <Link to="/instaction" >Instructions</Link>
+              <Link to="/instruction" >Instructions</Link>
               <Link to="/feedback">Feedback</Link>
               <Link to="/questions">Questions</Link>
               <Link to="/QuestionsList">List all the questions</Link>
@@ -68,7 +75,7 @@ class Main extends Component {
             <Box pad='medium'>
               <Route exact path="/" component={Signup} />
               <Route exact path="/login" component={Login} />
-              <Route exact path="/instaction" component={Instaction} />
+              <Route exact path="/instruction" component={Instruction} />
               <Route path="/questions" component={Questions} />
               <Route path="/callback" render={(props) => {
                 handleAuthentication(props);
