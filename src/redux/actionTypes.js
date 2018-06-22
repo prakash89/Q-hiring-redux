@@ -7,6 +7,8 @@ export const SHOWVERBAL = 'verbal';
 export const SHOWLOGICAL = 'logical';
 export const SHOWQUANTITATIVE = 'quantitative';
 export const LOGOUT = 'logout';
+export const ADDQUESTIONSUCCESS = "addQuestionSuccess";
+export const DISABLETOSTMESSAGE = "disableTost";
 
 
 

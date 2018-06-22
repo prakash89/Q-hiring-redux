@@ -7,6 +7,7 @@ import TextInput from 'grommet/components/TextInput';
 import PasswordInput from 'grommet/components/PasswordInput';
 import Button from 'grommet/components/Button';
 import Footer from 'grommet/components/Footer';
+import Box from 'grommet/components/Box';
 import {connect} from 'react-redux';
 import {signup} from '../redux/actions/signup';
 import '../app.css';
@@ -148,6 +149,14 @@ class Signup extends Component {
 
   render() {
     return(
+      <Box
+        justify='center'
+        align='center'
+        wrap={true}
+        reverse={false}
+        pad='medium'
+        margin='small'
+      >
       <div>
       { ((this.state.formValid == false) && this.state.isSubmit) ? (<Toast status='critical'>
         Invalid Forms.
@@ -199,6 +208,7 @@ class Signup extends Component {
         </Footer>
       </Form>
       </div>
+      </Box>
     )
   }
 }

@@ -32,9 +32,6 @@ class Navbar extends Component {
   const mapStateToProps = (state) => {
   	let userRole = localStorage.getItem('userRole')
   	let idToken = localStorage.getItem('idToken')
-  	console.log("---99-------------")
-  	console.log(`Inside mapStateToProps : ${idToken} : ${userRole}`)
-  	console.log("---99-------------")
   return ({
     user_role: userRole,
     idToken: idToken

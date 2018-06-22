@@ -4,6 +4,8 @@ import {
 	SHOWLOGICAL,
 	SHOWQUANTITATIVE,
 	QUESTIONSLIST,
+	ADDQUESTIONSUCCESS,
+	DISABLETOSTMESSAGE
 } from '../actionTypes';
 import API_END_POINT from '../../app';
 import browserHistory from '../../history';
@@ -120,6 +122,17 @@ export const addQuestion = (params) => {
       .then(response => response.json())
       .then(responseJson => {
         console.log("add question response:", responseJson)
+        dispatch({
+        	type: ADDQUESTIONSUCCESS,
+        	payload: responseJson
+        })
+        setTimeout(function() { 
+        	dispatch({
+        	type: DISABLETOSTMESSAGE
+        })
+        }.bind(this), 3000);
+      }).catch((error) => {
+      	console.log("Question  addition error: ",error)
       })
   }
 }

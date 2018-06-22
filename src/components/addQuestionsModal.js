@@ -42,15 +42,14 @@ class AddQuestionsModal extends Component {
     }
     console.log(`submit data ${JSON.stringify(this.state)}`)
     this.props.addQuestion(value);
+    setTimeout(function() { this.props.closeModalProp(); }.bind(this), 3000);
+    
   }
 
   render() {
 
     return (
       <Box pad='large'>
-        <Toast status='ok'>
-          A short message to let the user know something.
-        </Toast>
         <FormFields>
           <Box pad='small'>
             <label>Title</label>

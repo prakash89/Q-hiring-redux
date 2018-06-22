@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Table from 'grommet/components/Table';
 import TableRow from 'grommet/components/TableRow';
-import { questionsAdmin } from "../redux/actions";
+import { questionsAdmin, disableTostMessage } from "../redux/actions";
 import Article from 'grommet/components/Article';
 import Button from 'grommet/components/Button';
-import { Layer, Box, Split } from 'grommet';
+import { Layer, Box, Split, Toast } from 'grommet';
 import AddQuestionsModal from './addQuestionsModal';
 
 import '../css/questionsList.css';
@@ -21,6 +21,10 @@ class AdminQuestionsList extends Component {
 
   componentDidMount() {
     this.props.questionsAdmin();
+  }
+
+  onclose(){
+    this.setState({showAddQuestionLayer: false})
   }
 
   showAddQuestionModal() {
@@ -44,7 +48,7 @@ class AdminQuestionsList extends Component {
         </TableRow>
       )
     } else {
-      return <h1>Loading...</h1>
+      return <h4>No Questions!!</h4>
     }
 
   }
@@ -62,10 +66,9 @@ class AdminQuestionsList extends Component {
   }
 
   render() {
-    const { questionsList } = this.props;
-    console.log(questionsList)
     return (
       <div>
+    { this.props.message && <Toast status='ok'> Question Added Successfully. </Toast> }
         <Split fixed={false}>
           <Box />
           <Box />
@@ -105,11 +108,14 @@ class AdminQuestionsList extends Component {
               {this.renderQuestionRows()}
             </tbody>
           </Table>
-          {this.state.showAddQuestionLayer &&
+          {this.state.showAddQuestionLayer  &&
             <Layer
               closer={true}
+              flush = {true}
+              onClose={() =>this.onclose()}
+              
             >
-              <AddQuestionsModal />
+              <AddQuestionsModal closeModalProp={this.onclose.bind(this)} />
             </Layer>}
         </Article>
       </div>
@@ -120,11 +126,15 @@ class AdminQuestionsList extends Component {
 
 
 const mapStateToProps = (state) => {
+  console.log("00000000000000000000000")
+  console.log(state)
+  console.log("00000000000000000000000")
   return ({
-    questionsList: state.questionsData.questionsList
+    questionsList: state.questionsData.questionsList,
+    message: state.questionsData.message
   })
 }
 
 
 
-export default connect(mapStateToProps, { questionsAdmin })(AdminQuestionsList);
+export default connect(mapStateToProps, { questionsAdmin, disableTostMessage })(AdminQuestionsList);

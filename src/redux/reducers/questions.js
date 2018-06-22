@@ -5,6 +5,8 @@ import {
   SHOWQUANTITATIVE,
   QUESTIONSLIST,
   LOGOUT,
+  ADDQUESTIONSUCCESS,
+  DISABLETOSTMESSAGE
 } from '../actionTypes'
 
 
@@ -35,6 +37,11 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         questionsList: action.payload,
       };
+    case ADDQUESTIONSUCCESS:
+      return {
+        ...state,
+        message: action.payload
+      }
     case SHOWLOGICAL:
       return {
         ...state,
@@ -56,6 +63,11 @@ export default (state = INITIAL_STATE, action) => {
     };
     case LOGOUT:
      return initState;
+     case DISABLETOSTMESSAGE:
+     return {
+      ...state,
+      message: ''
+     }
     default:
       return state;
   }
