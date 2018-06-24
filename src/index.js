@@ -4,7 +4,7 @@ import 'grommet/scss/hpe/index';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-import { Router, Route, Link, Switch, BrowserRouter } from 'react-router-dom'
+import { Route, Link, Switch, BrowserRouter } from 'react-router-dom'
 import App from 'grommet/components/App';
 import Box from 'grommet/components/Box';
 import Login from './components/login';
