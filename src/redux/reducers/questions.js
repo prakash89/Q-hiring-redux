@@ -20,6 +20,7 @@ const INITIAL_STATE = {
 	showLogical: false,
   showQuantitative: false,
   resultId: null,
+  sectionNumber: null,
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -41,18 +42,21 @@ export default (state = INITIAL_STATE, action) => {
         showVerbal: false,
         showLogical: true,
         resultId: action.resultId,
+        sectionNumber:  action.sectionNumber,
       };
     case SHOWQUANTITATIVE:
       return { 
         ...state, 
         showLogical: false,
-	      showQuantitative: true,
+        showQuantitative: true,
+        sectionNumber:  action.sectionNumber,
       };
     case SHOWVERBAL:
       return { 
         ...state, 
         showVerbal: true,
-	      showQuantitative: false,
+        showQuantitative: false,
+        sectionNumber:  action.sectionNumber,
     };
     case LOGOUT:
      return initState;

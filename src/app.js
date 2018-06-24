@@ -1,3 +1,3 @@
-const API_END_POINT = 'http://52.204.219.8/';
+const API_END_POINT = 'http://34.207.217.224/';
 
 export default API_END_POINT;

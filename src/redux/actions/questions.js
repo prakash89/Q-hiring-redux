@@ -6,7 +6,6 @@ import {
 	QUESTIONSLIST,
 } from '../actionTypes';
 import API_END_POINT from '../../app';
-import browserHistory from '../../history';
 
 export const fetchQuestions = () => {
 	return (dispatch) => {
@@ -42,7 +41,6 @@ export const submitAnswers = (answers, section_number, resultId) => {
 			 resultId: resultId,
 	    }
 	};
-	console.log('params', params);
 	return (dispatch) => {
 		const URL = `${API_END_POINT}results`;
 		return fetch(URL, {
@@ -57,22 +55,23 @@ export const submitAnswers = (answers, section_number, resultId) => {
 			.then(response => response.json())
 			.then(json => {
 				if (section_number === 1) {
-					console.log(section_number)
 					dispatch({
 						type: SHOWLOGICAL,
-						resultId: json.resultId
+						resultId: json.resultId,
+						sectionNumber: section_number,
 					})
 				}
 				if (section_number === 2) {
 					dispatch({
 						type: SHOWQUANTITATIVE,
+						sectionNumber: section_number,
 					})
 				}
 				if (section_number === 3) {
 					dispatch({
 						type: SHOWVERBAL,
+						sectionNumber: section_number,
 					})
-					browserHistory.push('/feedback');
 				}
 				console.log('submitAnswers success - ', json)
 			})
