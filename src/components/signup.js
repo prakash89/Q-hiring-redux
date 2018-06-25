@@ -177,10 +177,10 @@ class Signup extends Component {
             <TextInput name="email" value={this.state.email} onDOMChange={(e) => this.onFiledChange(e)} onKeyUp={(e) => this.handleUserInput(e)} required />
           </FormField>
           <FormField label='Password' error={this.state.formErrors['password']}>
-            <TextInput name="password" value={this.state.password} onDOMChange={(e) => this.onFiledChange(e)} onKeyUp={(e) => this.handleUserInput(e)} required />
+            <PasswordInput name="password" value={this.state.password} onChange={(e) => this.onFiledChange(e)} onKeyUp={(e) => this.handleUserInput(e)} required />
           </FormField>
           <FormField label='Password Confirmation' error={this.state.formErrors['passwordconfirmation']}>
-            <TextInput name="passwordconfirmation" value={this.state.passwordconfirmation} onDOMChange={(e) => this.onFiledChange(e)} onKeyUp={(e) => this.handleUserInput(e)} required />
+            <PasswordInput name="passwordconfirmation" value={this.state.passwordconfirmation} onChange={(e) => this.onFiledChange(e)} onKeyUp={(e) => this.handleUserInput(e)} required />
           </FormField>
           <FormField label='College' error={this.state.formErrors['collage']}>
             <TextInput name="collage" value={this.state.collage} onDOMChange={(e) => this.onFiledChange(e)} onKeyUp={(e) => this.handleUserInput(e)} required />

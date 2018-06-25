@@ -36,15 +36,18 @@ class Questions extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.questionList !== this.props.questionList) {
-      this.setState({ questions: nextProps.questionList })
+      this.setState({ questions: nextProps.questionList });
     }
     if (nextProps.questions.showLogical !== this.props.questions.showLogical) {
-      this.setState({ showLogical: nextProps.questions.showLogical })
-      this.setState({ showVerbal: nextProps.questions.showVerbal })
+      this.setState({ showLogical: nextProps.questions.showLogical });
+      this.setState({ showVerbal: nextProps.questions.showVerbal });
     }
     if (nextProps.questions.showQuantitative !== this.props.questions.showQuantitative) {
-      this.setState({ showQuantitative: nextProps.questions.showQuantitative })
-      this.setState({ showLogical: nextProps.questions.showLogical })
+      this.setState({ showQuantitative: nextProps.questions.showQuantitative });
+      this.setState({ showLogical: nextProps.questions.showLogical });
+    }
+    if(nextProps.questions.sectionNumber == 3) {
+      this.props.history.push('/feedback');
     }
   }
 
@@ -53,7 +56,6 @@ class Questions extends Component {
     let category = this.state.questions;
     // let category_type = category[section_type[index]]['user_answer'];
     // let category_type = `${category}.${section_type}[${index}].user_answer`;
-    // console.log(category_type);
     if (section_type === 'verbal') {
       category.verbal[index].user_answer = option;
     } else if (section_type === 'logical') {
@@ -68,7 +70,6 @@ class Questions extends Component {
 
 
   render() {
-    console.log('Inside Render', this.state);
     let { userAnswers } = this.props;
     return (
       <div className="container mb-5">

@@ -19,11 +19,12 @@ export const login = (params) => {
         type: LOGIN,
         payload: json
       })
-      if (json.user.userRole == "admin") {
-        browserHistory.push('/QuestionsList')
-      } else{
-        browserHistory.push('/instaction')
-      }
+      // if (json.user.userRole == "admin") {
+      //   browserHistory.push('/QuestionsList')
+      // }else{
+      //   browserHistory.push('/instaction')
+      // }
+
     })
     .catch( error => {
       console.log("error",error);

@@ -12,6 +12,11 @@ class Instructions extends Component {
     this.props.requestInstructions();
   }
 
+  redirectQuestions() {
+    console.log('redirectQuestions', this.props);
+    this.props.history.push('/questions')
+  }
+
   render() {
     let { instructionReducer} =  this.props;
     cosnole.log(instructionReducer);
@@ -40,7 +45,8 @@ class Instructions extends Component {
                   label='Next'
                   type='submit'
                   accent={true}
-                  href='/questions'
+                  // href='/questions'
+                  onClick={() => this.redirectQuestions()}
                 />
               </Box>
             </div>
