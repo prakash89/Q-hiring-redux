@@ -9,6 +9,11 @@ class Instructions extends Component {
     super(props)
   }
 
+  redirectQuestions() {
+    console.log('redirectQuestions', this.props);
+    this.props.history.push('/questions')
+  }
+
   render() {
     return (
       <div className="container mb-5">
@@ -35,7 +40,8 @@ class Instructions extends Component {
                   label='Next'
                   type='submit'
                   accent={true}
-                  href='/questions'
+                  // href='/questions'
+                  onClick={() => this.redirectQuestions()}
                 />
               </Box>
             </div>

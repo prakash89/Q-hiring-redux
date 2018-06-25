@@ -15,6 +15,13 @@ class Feedback extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.redirect.logout !== nextProps.redirect.logout) {
+      this.props.history.push('/login')
+    }
+  }
+
+
   feedbackSubmit() {
     const params = {
       email: localStorage.getItem('userEmail'),
@@ -113,6 +120,7 @@ class Feedback extends Component {
 
 const mapStateToProps = (state) => ({
   resultId: state.questionsData.resultId,
+  redirect: state.feedbackData,
 });
 
 export default connect(mapStateToProps, { feedback })(Feedback);

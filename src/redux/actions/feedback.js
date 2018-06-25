@@ -1,6 +1,5 @@
-import { FEEDBACK, LOGOUT } from '../actionTypes'
+import { FEEDBACK, LOGOUT, LOGOUTMESSAGE } from '../actionTypes'
 import API_END_POINT from '../../app';
-import browserHistory from '../../history';
 
 export const feedback = (params) => {
 	console.log(params);
@@ -35,7 +34,10 @@ export const feedback = (params) => {
 					.then(response => {
 						console.log('Sucess LOGOUT', response)
 						localStorage.clear();
-						browserHistory.push('/login');
+						dispatch({
+							type: LOGOUTMESSAGE,
+							logoutMessage: response.message,
+						})
 						dispatch({
 							type: LOGOUT,
 						})

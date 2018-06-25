@@ -4,13 +4,9 @@ import 'grommet/scss/hpe/index';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-import { Router, Route, Link } from 'react-router-dom'
+import { Route, Link, Switch, BrowserRouter } from 'react-router-dom'
 import App from 'grommet/components/App';
 import Box from 'grommet/components/Box';
-import Header from 'grommet/components/Header';
-import Meter from 'grommet/components/Meter';
-import Title from 'grommet/components/Title';
-import Value from 'grommet/components/Value';
 import Login from './components/login';
 import Signup from './components/signup';
 import Feedback from './components/feedback';
@@ -24,7 +20,7 @@ import { createStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import reducers from './redux/reducers';
 import Auth from './Auth';
-import browserHistory from './history';
+import Header from './components/header'
 
 const store = createStore(
   reducers, {}, applyMiddleware(ReduxThunk)
@@ -49,33 +45,28 @@ class Main extends Component {
   }
 
   render() {
+    console.log('index', this.props);
 
     return (
       <Provider store={store}>
-        <Router onUpdate={() => window.scrollTo(0, 0)} history={browserHistory}>
+        <BrowserRouter onUpdate={() => window.scrollTo(0, 0)}>
           <App centered={false}>
-            <Header direction="row" justify="between" size="large"
-              pad={{ horizontal: 'medium' }}>
-              <Title>Q-Hiring</Title>
-              <Link to="/login" className="padding-left-fix">LogIn</Link>
-              <Link to="/" >SignUp</Link>
-              <Link to="/instaction" >Instructions</Link>
-              <Link to="/feedback">Feedback</Link>
-              <Link to="/questions">Questions</Link>
-            </Header>
+            <Header {...this.props}/>
             <Box pad='medium'>
-              <Route exact path="/" component={Signup} />
-              <Route exact path="/login" component={Login} />
-              <Route exact path="/instaction" component={Instaction} />
-              <Route path="/questions" component={Questions} />
-              <Route path="/feedback" component={Feedback} />
-              <Route path="/callback" render={(props) => {
-                handleAuthentication(props);
-                return <Callback {...props} /> 
-                }}/> 
+              <Switch>
+                <Route exact path="/" component={Signup} />
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/instaction" component={Instaction} />
+                <Route exact path="/questions" component={Questions} />
+                <Route exact path="/feedback" component={Feedback} />
+                <Route exact path="/callback" render={(props) => {
+                  handleAuthentication(props);
+                  return <Callback {...props} /> 
+                  }}/> 
+              </Switch>
             </Box>
           </App>
-        </Router>
+        </BrowserRouter>
       </Provider>
     );
   }
