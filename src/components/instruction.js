@@ -1,21 +1,20 @@
 import React, { Component } from 'react';
-import '../css/instaction.css';
+import { connect } from 'react-redux';
+import '../css/instruction.css';
 import { Button } from 'grommet';
 import { Link } from 'react-router-dom'
 import Box from 'grommet/components/Box';
+import {fetchInstructions } from '../redux/actions/instruction'
 
 class Instructions extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      instruction: {}
-    }
-  }
-
+  
   componentDidMount() {
     this.props.requestInstructions();
   }
+
   render() {
+    let { instructionReducer} =  this.props;
+    cosnole.log(instructionReducer);
     return (
       <div className="container mb-5">
         <div className="ui raised very padded text container segment ng-scope" id="instruction">
@@ -52,10 +51,20 @@ class Instructions extends Component {
   }
 }
 
+const mapStateToProps = (state) => ({
+  instructionReducer: state.instructionReducer,
+});
+
+
 const mapDispatchToProps = (dispatch) => ({
   requestInstructions() {
     dispatch(fetchInstructions());
   }
 });
 
-export default (Instruction);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Instructions);
+
