@@ -29,7 +29,11 @@ class Login extends Component {
     }
     this.props.login(params).then((response)=>{
       if (response.message == "You have successfully signed up.") {
-        this.props.history.push('/instruction')
+        if (response.role === 'user') {
+          this.props.history.push('/instruction')
+        } else {
+          this.props.history.push('/adminQuestionsList')
+        }
       } else if (response.error) {
         this.state.formError = response.error
         this.setState({ formError: 'Email or password is invalid' })

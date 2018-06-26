@@ -6,6 +6,7 @@ const INITIAL_STATE = {
   email: '',
   user_id: '',
   error: '',
+  role: 'user',
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -19,7 +20,8 @@ export default (state = INITIAL_STATE, action) => {
       let id_token = action.payload.session.authToken
       let email = action.payload.user.email
       let user_id = action.payload.user.id
-      return {...state, message, id_token, email, user_id};
+      let user_role = action.payload.user.role
+      return { ...state, message, id_token, email, user_id, user_role};
     case LOGOUT:
       return initState;
     default:
