@@ -61,7 +61,7 @@ class Main extends Component {
               <Switch>
                 <Route exact path="/" component={Signup} />
                 <Route exact path="/login" component={Login} />
-                <Route exact path="/instaction" component={Instaction} />
+                <Route exact path="/instruction" component={Instruction} />
                 <Route exact path="/questions" component={Questions} />
                 <Route exact path="/feedback" component={Feedback} />
                 <Route exact path="/callback" render={(props) => {

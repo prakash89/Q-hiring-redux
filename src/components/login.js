@@ -11,6 +11,9 @@ import Box from 'grommet/components/Box';
 class Login extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      formError: '',
+    }
   }
 
   authLogin() {
@@ -20,23 +23,19 @@ class Login extends Component {
   }
 
   loginSubmit(user_params) {
-
     let params = {
       email: user_params.username,
       password: user_params.password
     }
-    this.props.login(params)
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.message == "You have successfully signed up.") {
-<<<<<<< HEAD
-      this.props.history.push('/instruction')
-=======
-      console.log('componentWillReceiveProps', this.props);
-      this.props.history.push('/instaction')
->>>>>>> 8af5b6cff768e8eae00e52dd4a4396cdbfaf1bf3
-    }
+    this.props.login(params).then((response)=>{
+      if (response.message == "You have successfully signed up.") {
+        this.props.history.push('/instruction')
+      } else if (response.error) {
+        this.state.formError = response.error
+        this.setState({ formError: response.error })
+        setTimeout(() => this.setState({ formError: '' }), 3000);
+      }
+    })
   }
 
   render() {
@@ -51,8 +50,9 @@ class Login extends Component {
       >
         <LoginForm
           title='Login'
-          rememberMe={false}
-          onSubmit={(user_params) => this.loginSubmit(user_params)} />
+          rememberMe = {false}
+          errors = {[this.state.formError]}
+          onSubmit = {(user_params) => this.loginSubmit(user_params)} />
         <Button
           label='Login through auth0'
           onClick={() => this.authLogin()} />

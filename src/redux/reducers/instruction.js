@@ -17,6 +17,7 @@ export default (state = INITIAL_STATE, action) => {
         quantitativeQuestions: action.instruction.quantitativeQuestions,
         verbalQuestions: action.instruction.verbalQuestions,
         time: action.instruction.time,
+        totalQuestions: action.instruction.totalQuestions,
       };
     default:
       return state;

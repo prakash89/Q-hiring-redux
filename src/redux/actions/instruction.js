@@ -5,7 +5,7 @@ export const fetchInstructions = () => {
   return (dispatch) => {
     const URL = `${API_END_POINT}instruction`;
     fetch(URL, {
-      method: GET,
+      method: 'GET',
       headers: {
         "Content-Type": "application/json",
         "Authorization": localStorage.getItem('idToken'),
@@ -14,14 +14,14 @@ export const fetchInstructions = () => {
     })
     .then(response => response.json())
     .then(json => {
-      console.log('fetched instructions:', json)
+      console.log('fetchInstructions success- ', json)
       dispatch({
         type: INSTRUCTION,
         instruction: json.exam
       })
     })
     .catch(error => {
-      console.log('fetchQuestions  error - ', error)
+      console.log('fetchInstructions  error - ', error)
     })
   } 
 }

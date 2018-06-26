@@ -23,7 +23,6 @@ class AddQuestionsModal extends Component {
   }
 
   selectChange(e) {
-    debugger
     console.log(`vale: ${JSON.stringify(e.value)}`)
     console.log(`vale: ${JSON.stringify(e.label)}`)
     console.log(`vale: ${e.target.name}`)

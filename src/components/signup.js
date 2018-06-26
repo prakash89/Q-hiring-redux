@@ -108,39 +108,35 @@ class Signup extends Component {
         break;
       case 'fname':
         firstNameValid = value.length >= 4;
-        fieldValidationErrors.fname = firstNameValid ? '' : 'Please enter more than 3 chanracters';
-        break;
-      case 'lname':
-        lastNameValid = value.length >= 4;
-        fieldValidationErrors.lname = lastNameValid ? '' : ' Please enter more than 3 chanracters';
+        fieldValidationErrors.fname = firstNameValid ? '' : 'Please enter more than 3 charecters';
         break;
       case 'password':
         passwordValue = value;
         passwordValid = value.length >= 6;
-        fieldValidationErrors.password = passwordValid ? '' : ' Please enter more than 3 chanracters';
+        fieldValidationErrors.password = passwordValid ? '' : ' Password should contain minimum 6 charecters';
         break;
       case 'passwordconfirmation':
         confirmPasswordValid = (this.state.password == value);
         fieldValidationErrors.passwordconfirmation = confirmPasswordValid ? '' : 'password and password confirmation is not match';
         break;
       case 'collage':
-        collageValid = value.length >= 4;
-        fieldValidationErrors.collage = collageValid ? '' : '  Please enter more than 3 chanracters';
+        collageValid = value.length >= 1;
+        fieldValidationErrors.collage = collageValid ? '' : ' college name is required';
         break;
       case 'passing':
         passingValid = value.length >= 4;
         fieldValidationErrors.passing = passingValid ? '' : '  Please enter more than 3 chanracters';
         break;
       case 'batch':
-        batchValid = value.length >= 3;
-        fieldValidationErrors.batch = batchValid ? '' : '  Please enter more than 2 chanracters';
+        batchValid = value.length >= 1;
+        fieldValidationErrors.batch = batchValid ? '' : '  exam batch is required';
         break;
       default:
         break;
     }
     this.setState({
       formErrors: fieldValidationErrors,
-      emailValid, firstNameValid, lastNameValid, passwordValid, confirmPasswordValid, collageValid, passingValid, batchValid
+      emailValid, firstNameValid, passwordValid, confirmPasswordValid, collageValid, passingValid, batchValid
     }, this.validateForm);
   }
 

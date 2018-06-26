@@ -9,23 +9,23 @@ import {fetchInstructions } from '../redux/actions/instruction'
 class Instructions extends Component {
   
   componentDidMount() {
+    console.log('componentDidMount Instructions');
     this.props.requestInstructions();
   }
 
   redirectQuestions() {
-    console.log('redirectQuestions', this.props);
     this.props.history.push('/questions')
   }
 
   render() {
     let { instructionReducer} =  this.props;
-    cosnole.log(instructionReducer);
+    console.log('instructionReducer:', instructionReducer);
     return (
       <div className="container mb-5">
         <div className="ui raised very padded text container segment ng-scope" id="instruction">
           <h2 className="ui header">Instructions:</h2>
-          <div className="ui red segment">Duration of the test - 60 mins. After 60 mins your answers will be auto submitted.</div>
-          <div className="ui teal segment">Total number of questions - 60. 20 questions each in 3 sections of Verbal, Logical and Aptitude (in the same order).</div>
+          <div className="ui red segment">Duration of the test - {instructionReducer.time} mins. After {instructionReducer.time} mins your answers will be auto submitted.</div>
+          <div className="ui teal segment">Total number of questions - {instructionReducer.totalQuestions}. {instructionReducer.logicalQuestions} questions in Verbal, {instructionReducer.logicalQuestions} questions in Logical and {instructionReducer.logicalQuestions} questions in Quantitative (in the same order).</div>
           <div className="ui yellow segment">Cannot Switch between Sections. Finish one to attend the next.</div>
           <div className="ui olive segment">Do not refresh or press back key. If done, new questions will be presented with a penalty of 2 mins time.</div>
           <div className="ui purple segment">If the application is not accessible, notify the invigilator in your room.</div>

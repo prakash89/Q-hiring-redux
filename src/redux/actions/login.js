@@ -12,19 +12,17 @@ export const login = (params) => {
     })
     .then(response => response.json())
     .then(json => {
-      localStorage.setItem('idToken', json.session.authToken);
-      localStorage.setItem('userEmail', json.user.email);
-      localStorage.setItem('userRole', json.user.userRole);
+      if (json.session) {
+        localStorage.setItem('idToken', json.session.authToken);
+        localStorage.setItem('userEmail', json.user.email);
+        localStorage.setItem('userRole', json.user.userRole);
+      }
       dispatch({
         type: LOGIN,
         payload: json
       })
-      // if (json.user.userRole == "admin") {
-      //   browserHistory.push('/QuestionsList')
-      // }else{
-      //   browserHistory.push('/instaction')
-      // }
 
+      return json
     })
     .catch( error => {
       console.log("error",error);

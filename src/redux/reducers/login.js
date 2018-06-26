@@ -5,11 +5,16 @@ const INITIAL_STATE = {
   id_token: '',
   email: '',
   user_id: '',
+  error: '',
 }
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case LOGIN:
+      if (action.payload.error) {
+        state.error = action.payload.error;
+        return state;
+      }
       let message = action.payload.message
       let id_token = action.payload.session.authToken
       let email = action.payload.user.email
