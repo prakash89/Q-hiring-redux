@@ -13,7 +13,9 @@ export default {
     extensions: ['.js', '.scss', '.css', '.json']
   },
   devServer: {
-    historyApiFallback: true,
+    disableHostCheck: true,
+    host: 'localhost',
+    port: 8080
   },
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
