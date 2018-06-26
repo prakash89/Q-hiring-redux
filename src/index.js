@@ -3,8 +3,13 @@ import 'grommet/scss/hpe/index';
 
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+<<<<<<< HEAD
 
 import { Route, Link, Switch, BrowserRouter } from 'react-router-dom'
+=======
+// import { BrowserRouter, Route, Switch,Link, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+>>>>>>> question_page
 import App from 'grommet/components/App';
 import Box from 'grommet/components/Box';
 import Login from './components/login';
@@ -64,6 +69,7 @@ class Main extends Component {
                 <Route exact path="/instruction" component={Instruction} />
                 <Route exact path="/questions" component={Questions} />
                 <Route exact path="/feedback" component={Feedback} />
+                <Route path="/adminQuestionsList" component={QuestionsList} />
                 <Route exact path="/callback" render={(props) => {
                   handleAuthentication(props);
                   return <Callback {...props} /> 
