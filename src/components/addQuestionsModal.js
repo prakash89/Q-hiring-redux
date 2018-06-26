@@ -23,10 +23,6 @@ class AddQuestionsModal extends Component {
   }
 
   selectChange(e) {
-    debugger
-    console.log(`vale: ${JSON.stringify(e.value)}`)
-    console.log(`vale: ${JSON.stringify(e.label)}`)
-    console.log(`vale: ${e.target.name}`)
     this.setState({ [e.target.name]: e.value })
   }
 
@@ -48,9 +44,6 @@ class AddQuestionsModal extends Component {
 
     return (
       <Box pad='large'>
-        <Toast status='ok'>
-          A short message to let the user know something.
-        </Toast>
         <FormFields>
           <Box pad='small'>
             <label>Title</label>

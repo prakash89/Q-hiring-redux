@@ -14,6 +14,7 @@ import QUANTITATIVE from './question/quantitative';
 
 
 class Questions extends Component {
+
   constructor(props) {
     super(props)
     this.state = {

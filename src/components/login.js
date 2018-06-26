@@ -11,28 +11,35 @@ import Box from 'grommet/components/Box';
 class Login extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      formError: '',
+    }
   }
 
   authLogin() {
-    console.log("Inside the authLogiin button click")
+    console.log("Inside the authLogin button click")
     const auth = new Auth();
     auth.login();
   }
 
   loginSubmit(user_params) {
-
     let params = {
       email: user_params.username,
       password: user_params.password
     }
-    this.props.login(params)
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.message == "You have successfully signed up.") {
-      console.log('componentWillReceiveProps', this.props);
-      this.props.history.push('/instaction')
-    }
+    this.props.login(params).then((response)=>{
+      if (response.message == "You have successfully signed up.") {
+        if (response.role === 'user') {
+          this.props.history.push('/instruction')
+        } else {
+          this.props.history.push('/adminQuestionsList')
+        }
+      } else if (response.error) {
+        this.state.formError = response.error
+        this.setState({ formError: 'Email or password is invalid' })
+        setTimeout(() => this.setState({ formError: '' }), 3000);
+      }
+    })
   }
 
   render() {
@@ -47,8 +54,9 @@ class Login extends Component {
       >
         <LoginForm
           title='Login'
-          rememberMe={false}
-          onSubmit={(user_params) => this.loginSubmit(user_params)} />
+          rememberMe = {false}
+          errors = {[this.state.formError]}
+          onSubmit = {(user_params) => this.loginSubmit(user_params)} />
         <Button
           label='Login through auth0'
           onClick={() => this.authLogin()} />
