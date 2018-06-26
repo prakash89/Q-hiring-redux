@@ -32,7 +32,7 @@ class Login extends Component {
         this.props.history.push('/instruction')
       } else if (response.error) {
         this.state.formError = response.error
-        this.setState({ formError: response.error })
+        this.setState({ formError: 'Email or password is invalid' })
         setTimeout(() => this.setState({ formError: '' }), 3000);
       }
     })
