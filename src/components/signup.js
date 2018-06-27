@@ -231,7 +231,6 @@ class Signup extends Component {
 }
 
 const mapStateToProps = ({ signupData }) => {
-  console.log("signupData ==" , signupData)
   return ({
     message: signupData.message,
     email: signupData.email,
