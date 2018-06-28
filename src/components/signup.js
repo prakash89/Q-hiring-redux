@@ -43,7 +43,10 @@ class Signup extends Component {
       confirmPasswordValid: false,
       collageValid: false,
       passingValid: false,
-      batchValid: false
+      batchValid: false,
+      branchValid: false,
+      phoneValid: false,
+      cityValid: false
     }
   }
 
@@ -99,6 +102,9 @@ class Signup extends Component {
     let collageValid = this.state.collageValid;
     let passingValid = this.state.passingValid;
     let batchValid = this.state.batchValid;
+    let branchValid = this.state.branchValid;
+    let phoneValid = this.state.phoneValid;
+    let cityValid = this.state.cityValid;
     let passwordValue = ''
 
     switch (fieldName) {
@@ -107,45 +113,57 @@ class Signup extends Component {
         fieldValidationErrors.email = emailValid ? '' : ' is invalid';
         break;
       case 'fname':
-        firstNameValid = value.length >= 4;
-        fieldValidationErrors.fname = firstNameValid ? '' : 'Please enter more than 3 chanracters';
+        firstNameValid = value.length >= 4 && value.match(/^[a-zA-Z_.-]*$/);
+        fieldValidationErrors.fname = firstNameValid ? '' : 'Enter more than 3 characters without special charecters and space';
         break;
       case 'lname':
-        lastNameValid = value.length >= 4;
-        fieldValidationErrors.lname = lastNameValid ? '' : ' Please enter more than 3 chanracters';
+        lastNameValid = value.length >= 4 && value.match(/^[a-zA-Z_.-]*$/);
+        fieldValidationErrors.lname = lastNameValid ? '' : ' Enter more than 3 characters without special charecters and space';
         break;
       case 'password':
         passwordValue = value;
         passwordValid = value.length >= 6;
-        fieldValidationErrors.password = passwordValid ? '' : ' Please enter more than 3 chanracters';
+        fieldValidationErrors.password = passwordValid ? '' : ' Enter more than 6 character';
         break;
       case 'passwordconfirmation':
         confirmPasswordValid = (this.state.password == value);
-        fieldValidationErrors.passwordconfirmation = confirmPasswordValid ? '' : 'password and password confirmation is not match';
+        fieldValidationErrors.passwordconfirmation = confirmPasswordValid ? '' : 'password does not match';
         break;
       case 'collage':
-        collageValid = value.length >= 4;
-        fieldValidationErrors.collage = collageValid ? '' : '  Please enter more than 3 chanracters';
+        collageValid = value.length >= 4 && value.match(/^[a-zA-Z \-_]*$/);
+        fieldValidationErrors.collage = collageValid ? '' : '  Enter more than 3 character with special characters';
         break;
       case 'passing':
-        passingValid = value.length >= 4;
-        fieldValidationErrors.passing = passingValid ? '' : '  Please enter more than 3 chanracters';
+        passingValid = value.length === 4 && value.match(/^[0-9]/);
+        fieldValidationErrors.passing = passingValid ? '' : '  Enter 4 characters only';
         break;
       case 'batch':
-        batchValid = value.length >= 3;
-        fieldValidationErrors.batch = batchValid ? '' : '  Please enter more than 2 chanracters';
+        batchValid = value.length >= 2 && value.match(/^[a-zA-Z0-9 \-_]*$/);
+        fieldValidationErrors.batch = batchValid ? '' : '  Enter more than 2 character';
+        break;
+      case 'branch':
+        branchValid = value.match(/^[a-zA-Z \-]*$/) ? true : false;
+        fieldValidationErrors.branch = branchValid ? '' : '  Special charecters are not allowed';
+        break;
+      case 'phone':
+        phoneValid = value.match(/^\(?([0-9]{3})\)?[-]?([0-9]{3})[-]?([0-9]{4})$/) ? true : false;
+        fieldValidationErrors.phone = phoneValid ? '' : '  Enter phone number in format XXX-XXX-XXXX';
+        break;
+      case 'city':
+        cityValid = value.match(/^[a-zA-Z\-]*$/)  ? true : false;
+        fieldValidationErrors.city = cityValid ? '' : '  Special charecters and numbers are not allowed';
         break;
       default:
         break;
     }
     this.setState({
       formErrors: fieldValidationErrors,
-      emailValid, firstNameValid, lastNameValid, passwordValid, confirmPasswordValid, collageValid, passingValid, batchValid
+      emailValid, firstNameValid, lastNameValid, passwordValid, confirmPasswordValid, collageValid, passingValid, batchValid, branchValid, phoneValid, cityValid
     }, this.validateForm);
   }
 
   validateForm() {
-    this.setState({ formValid: this.state.emailValid && this.state.firstNameValid && this.state.lastNameValid });
+    this.setState({ formValid: this.state.emailValid && this.state.firstNameValid && this.state.lastNameValid && this.state.branchValid && this.state.phoneValid && this.state.cityValid });
   }
 
   render() {
